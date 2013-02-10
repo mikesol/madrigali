@@ -1,0 +1,14 @@
+*.aif
+*.wav
+*.aiff
+*.midi
+*.svg
+*.pdf
+*.mp3
+*.m4a
+*.band
+*.aux
+*.log
+*.out
+*~
+.DS_Store
