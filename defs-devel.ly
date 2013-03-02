@@ -28,6 +28,8 @@ gSkip = {
   \once \override NoteHead #'no-ledgers = ##t
 }
 
+hairtip = \once \override Hairpin #'circled-tip = ##f
+
 noStem = { \once \override Stem #'stencil = ##f \once \override Flag #'stencil = ##f }
 
 #(define (broken-tuplet-text grob l)
