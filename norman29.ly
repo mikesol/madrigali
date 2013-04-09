@@ -785,7 +785,7 @@ sopranoUbiquitous = \relative c' {
   r a^\mf r a r a |
   cis cis b cis \times 2/3 { ais4 fisis } |
   R2 | R2 |
-  bes,8^\p bes8 \yy r8 r4 |
+  ais,8^\p ais8 \yy r8 r4 |
 }
 
 sopranoHighHigh = \relative c' {
@@ -1014,11 +1014,11 @@ altoUbiquitous = \relative c' { \autoBeamOff
   a' a gis a \times 2/3 { r2 } |
   \times 2/3 { r4 b,^\p^\< c }
   \times 2/3 { cis d8 } r4 |
-  g,8^\p g8 \yy r8 r4 |
+  fisis,8^\p fisis8 \yy r8 r4 |
   \times 2/3 { r4 gis'4^\mp^\espressivo r } \times 2/3 { r4 g4^\espressivo r } |
   \times 2/3 { r4 fis^\espressivo r } \times 2/3 { r eis^\espressivo r } |
   \xx r8 e4^- \yy dis8 d4 b |
-  \times 2/3 { g d'^\< e } d^\mf cis |
+  \times 2/3 { g d'^\< e } d^\mf e |
   cis^\> dis cisis gis |
   e2^\< d'4^\> cis |
   a2^\mp fisis |
@@ -1305,8 +1305,8 @@ tenorCat = {
     \times 2/3 { ais4 b fis' ~ } fis ~ |
     \times 3/2 { fis8 e ~ } e4 g8 ~ |
     g4 ~ \times 2/3 { g2 g,4 ~ } |
-    \times 2/3 { g fis4 a ~ } a8 ais8 ~ |
-    \times 2/3 { ais4 b cis } gis'4 ~ |
+    \times 2/3 { g fis4 d' ~ } d8 bes8 ~ |
+    \times 2/3 { bes4 b cis } gis'4 ~ |
     gis4. eis4. ~ |
     eis8 cis4.^\mf bis4 |
   }
@@ -1508,11 +1508,11 @@ bassCat = \relative c' {
   dis gis g fis |
   c'16^\f \nopocoapoco aes g fis e r16 c'16. b32 ~ b16 bes ~ bes32 a16. |
   r8 b bes r8 a4 ~ |
-  a8 ais8 b4 \times 2/3 { g8 b d } |
+  a4 d4 \times 2/3 { g,8 b d } |
   \times 2/3 { a'4 g fis } e ~ |
   e8 d4 c8 ~ c4 |
-  r4 r8 ais8 ~ ais4 ~ |
-  ais8 r8 a4. a8 ~ |
+  r4 r8 bes8 ~ bes4 ~ |
+  bes8 r8 a4. a8 ~ |
   a4. r8 gis'4^\mf ~ |
   gis4 ~ gis8 gisis8 ~ gisis4 |
   R2. |
@@ -1574,7 +1574,7 @@ bassWordsCat = \lyricmode {
   \repeat unfold 92 dum
   \repeat unfold 5 dum
   dum ba dum ba
-  dum dum Ro -- sen -- blat
+  dum dum Ro -- sen %-- blat
   you are my fav -- 'rite Nor -- man Ro -- sen -- blat
   Nor -- man
   Nor -- man

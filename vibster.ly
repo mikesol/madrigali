@@ -25,7 +25,7 @@
       (whittle-at-x (cdr bez-in) (cons (car bez-in) bez-out) pt head?)))
       
 
-#(define (vibster grob x-os y-scale l)
+#(define (vibster grob x-os y-scale thick l)
   (let* ((bez (paths-to-bezier (simple-to-robust-bezier-x-only l)))
          (nep (ly:grob-property grob 'normalized-endpoints))
          (last-x (car (rac (rac bez))))
@@ -44,7 +44,7 @@
     (ly:stencil-translate
       (make-connected-path-stencil
        (map (lambda (x) (coord-hack (cons 0.0 (cdaar bez)) x)) reduced-bez)
-         0.1 x-scale y-scale #f #f)
+         thick x-scale y-scale #f #f)
       (coord-translate (coord-scale (cons x-scale y-scale) (cons x-os (cdaar bez)))  (cons (if (eqv? grob (car list-of-grobs)) (interval-length (ly:grob-extent my-lb my-lb X)) (cdr (ly:grob-extent my-lb my-com X))) 0)))))
 
 #(define alto-one

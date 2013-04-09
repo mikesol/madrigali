@@ -28,7 +28,7 @@ gSkip = {
   \once \override NoteHead #'no-ledgers = ##t
 }
 
-hairtip = \once \override Hairpin #'circled-tip = ##f
+hairtip = \once \override Hairpin #'circled-tip = ##t
 
 noStem = { \once \override Stem #'stencil = ##f \once \override Flag #'stencil = ##f }
 
@@ -383,6 +383,11 @@ tupFrac = \once \override TupletNumber #'text = #tuplet-number::calc-fraction-te
 saNormal = { \clef treble \normal }
 tNormal = { \clef "treble_8" \normal }
 bNormal = { \clef bass \normal }
+
+pF = \markup { \center-align \line {
+\normal-text \fontsize #3 ( \raise #0.5 \dynamic f \normal-text \fontsize #3 ) } }
+
+pFdynamic = #(make-dynamic-script pF)
 
 subF = \markup { \center-align \concat {
 \normal-text { \bold { \italic sub } }
