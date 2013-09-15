@@ -5,6 +5,7 @@
   1) Use slurs AND beams instead of just beams.
   2) Beam according to measure
   3) LOOK INTO 7/8
+  % 2.17.12 works
 %}
 
 %#(set-global-staff-size 14.14)
@@ -104,6 +105,7 @@ ksnote = \markup \justify {
   %title = "wal'dOz"
   title = "rain real come"
   subtitle = "for Mirkku"
+  %title = "Somewhere Over the Rainbow"
   composer = "Harold Arlen"
   poet = "E.Y. Harburg"
   arranger = "arr. Mike Solomon"
@@ -367,6 +369,8 @@ s2.*2 |
 %%% 339
 marksBeginning = {
   \tempo 2=136
+  \time 2/4
+  s2 |
   \time 3/4
   s2. |
   \time 5/8
@@ -409,6 +413,7 @@ sopranoBeginning = \relative c' { \autoBeamOff
   \hackKey b \major
 \clef treble %@
    \key b \major {
+  R2 |
   b2^\mf gis'4 |
   R1*5/8
 }   \key ees \major \relative c'' {
@@ -448,6 +453,7 @@ mezzoBeginning = \relative c' { \autoBeamOff
 %\clef soprano %@
 \clef treble
    \key b \major {
+  R2 |
   gis2^\mf e'4 |
   R1*5/8 |
   %fis,4.^\mp dis'4 |
@@ -488,6 +494,7 @@ altoBeginning = \relative c { \autoBeamOff
 %\clef alto %@
 \clef "treble_8"
    \key b \major {
+  R2 |
   e2^\mf b'4 |
   fis4.^\mp dis'4 |
 }   \key ees \major \relative c' {
@@ -526,6 +533,7 @@ tenorBeginning = \relative c { \autoBeamOff
   \clef "treble_8"
 %\clef tenor %@
    \key b \major {
+  R2 |
   R2. |
   R1*5/8 |
   %r4. fis4^\mp | 
@@ -561,21 +569,23 @@ tenorBeginningWords = \lyricmode {
   can't I
 }
 
-bassBeginning = \relative c { \autoBeamOff
+bassBeginning = \relative c' { \autoBeamOff
   \hackKey b \major
   \clef bass
    \key b \major {
+  \cricket \tri c2^\f^\markup \italic "bruit blanc" |
   R2. |
   R1*5/8 |
 }   \key ees \major \relative c {
-  bes4^\f g c4. % r16
+  \bNormal
+  bes4 g c4. % r16
   %R1*15/16 |
   r8 bes4 ~ |
   bes8. r8. |
   r8 ees4 ~ ees8 r8 r4 |
 }   \key c \major {
   R2. |
-  r4 d4^\mp^\< ~ d2 ~ |
+  r4 d,4^\mp^\< ~ d2 ~ |
   d8 g,8^\f r4 r4. |
 }   \key b \major {
   r8. a^\mf^\> dis f, |
@@ -588,6 +598,7 @@ bassBeginning = \relative c { \autoBeamOff
 }}
 
 bassBeginningWords = \lyricmode {
+  [shshsh]
   o -- ver rain
   why
   I
@@ -757,7 +768,7 @@ tenorTriumphal = \relative c' { %\autoBeamOff
   ais4 b8 ais a4 gis4 |
   gis ais8 gis fis4 e |
   dis2.^\< fis4 |
-  e8^\f b' e2 ~ e8 fis |
+  e8^\mf b' e2 ~ e8 fis |
   g2.. a8 |
   b1^\f ~ |
 }   \key ees \major \relative c' {
@@ -1225,7 +1236,7 @@ tenorCartoon = \relative c' { %\autoBeamOff
   ais4 r8 |
   r4 gis2^\f r4 |
   r2. b4 |
-  r2 bis4^mf^\> |
+  r2 bis4^\mf^\> |
   gis8 ( g ) fis ( f ) |
 }   \key ees \major \relative c' {
   bes4 aes ees c^\mp |
@@ -1294,7 +1305,7 @@ sopranoRestarts = \relative c'' { %\autoBeamOff
   R1*5/4
   R2 |
   %r4. e8-.^\mp e-. e-. r8 |
-  r4 r16 e16-.^\pp e-. e-. r8
+  r4 r16 gis16-.^\pp gis-. gis-. r8
   %R1*5/8 |
 }}
 
@@ -1592,10 +1603,10 @@ bassSurprises = \relative c { %\autoBeamOff
   b c d e |
   r d c r |
   r b b r |
-  r d c b |
-  c r b b |
-  r d2 c4 |
-  b^\< c d |
+  r a b c |
+  d r b b |
+  r d4 c c |
+  b8.^\< c d e |
 }}
 
 bassSurprisesWords = \lyricmode {
@@ -1609,9 +1620,9 @@ bassSurprisesWords = \lyricmode {
   trou -- bles melt like
   trou -- bles
   trou -- bles
-  melt like le -- mon
+  trou -- bles melt like
   trou -- bles
-  melt like trou -- bles melt
+  where you'll like trou -- bles melt like
 }
 
 
@@ -2693,7 +2704,7 @@ sopranoSugar = \relative c'' { %\autoBeamOff
   fis4^. r d'2^\mp^\espressivo |
   g,4 r gis8^\< [ ( cis ~ ] |
   cis [ b ) ] cis [ d ] e [ d ] cis b |
-  \times 2/3 { ais4^\f ais'8 } d,,8^\mf d''8 cis, |
+  \times 2/3 { ais4^\f ais8 } d8^\mf d,8 r |
 }}
 
 sopranoSugarWords = \lyricmode {
@@ -2703,7 +2714,7 @@ sopranoSugarWords = \lyricmode {
   whe -- e -- e -- e -- e -- e -- e -- e -- ere
   Some -- where
   where you'll find me oh Some -- where
-  Some -- where o
+  Some -- where %o
 }
 
 mezzoSugar = \relative c' { %\autoBeamOff 
@@ -2872,7 +2883,8 @@ sopranoWortspiel = \relative c' { %\autoBeamOff
   dis4 ( d ) cis bis |
   ais4 ( gis ) fisis ( dis ) |
 }   \key fis \major {
-  fis2^\f fis' |
+  %fis2^\f fis' |
+  fis8^\f [ gis16 ais b cis dis eis ] fis2 |
   eis4 cis8 dis eis4 |
 }}
 
@@ -2915,8 +2927,9 @@ mezzoWortspiel = \relative c' { %\autoBeamOff
   gis2 dis |
   bis cis |
 }   \key fis \major {
-  fis8^\f [ gis16 ais b cis dis eis ] fis8 [ eis16 dis cis b ais gis ~ ] |
-  gis2. |
+  %fis8^\f [ gis16 ais b cis dis eis ] fis8 [ eis16 dis cis b ais gis ~ ] |
+  fis2 ais4 ( a ) |
+  gis4 b gis |
 }}
 
 mezzoWortspielWords = \lyricmode {
@@ -2924,7 +2937,7 @@ mezzoWortspielWords = \lyricmode {
   blue -- birds fly can't
   there's a skies and the dreams that you way up
   land that
-  I bow way up high there's
+  I bow way up high there's a land hap
 }
 
 
@@ -3220,7 +3233,7 @@ sopranoWinding = \relative c' { %\autoBeamOff
 sopranoWindingWords = \lyricmode {
   some dreams that you dare to dream
   real -- ly do come
-  some -- day I'll wish u
+  some -- day I'll wish you
   blue -- birds fly if hap -- py
 }
 
@@ -3237,7 +3250,7 @@ mezzoWinding = \relative c' { %\autoBeamOff
 mezzoWindingWords = \lyricmode {
   some dreams that you dare to dream
   day
-  wish u blue birds fly if hap -- py
+  wish you blue birds fly if hap -- py
 }
 
 altoWinding = \relative c' { %\autoBeamOff
@@ -3253,7 +3266,7 @@ altoWinding = \relative c' { %\autoBeamOff
 altoWindingWords = \lyricmode {
   dream
   some
-  wish u blue birds fly hap -- py
+  wish you blue birds fly hap -- py
 }
 
 tenorWinding = \relative c { %\autoBeamOff
@@ -3739,16 +3752,19 @@ mezzoFuzz = \relative c' { %\autoBeamOff
 }   \key c \major {
   e4 c4 e |
 }   \key cis \major {
-  cis4 e eis |
+   %cis4 e eis |
+   r4 cis'2 |
 }   \key cis \major {
-  r8 cis'4^_ bis,8^\< cis2 |
+  r4. %{cis'4^_%} bis,8^\< cis2 |
 }}
 
 mezzoFuzzWords = \lyricmode {
   Why oh why can't
   If hap -- py
-  blue -- birds fly
-  birds birds o
+  %blue -- birds fly
+  birds
+  %birds
+  birds o
 }
 
 altoFuzz = \relative c' { %\autoBeamOff
@@ -3756,18 +3772,19 @@ altoFuzz = \relative c' { %\autoBeamOff
   R2 |
 }   \key b \major {
   r2 dis4 |
-  dis dis b8 |
+  dis dis b8 ~ |
 }   \key c \major {
-   \times 6/7 { ais4 gis8 fis e4 c8 } |
+   %\times 6/7 { ais4 gis8 fis e4 c8 } |
+   b8 r r2 |
 }   \key cis \major {
-  r16 eis'8. cis8 dis eis fis |
+  r16 eis8. cis8 dis eis fis |
 }   \key c \major {
   \times 2/3 { gis2 ais4 } gis8 [ fis ] eis dis |
 }}
 	
 altoFuzzWords = \lyricmode {
   why why why
-  why oh why oh why can't
+  why %oh why oh why can't
   o -- ver the rain -- bow why
   oh o -- ver the
 }
@@ -3781,7 +3798,7 @@ tenorFuzz = \relative c { %\autoBeamOff
   cis4^\f ~ cis8 fis ~ fis4 |
   gis4 ais r8 |
 }   \key c \major {
-  R2. |
+  r2 b4 |
 }   \key cis \major {
   ais4^\mf fisis gis |
 }   \key c \major {
@@ -3792,6 +3809,7 @@ tenorFuzzWords = \lyricmode {
   %Why oh
   Why why
   Why I
+  If
   blue birds fly
   birds fly o
 }
@@ -3806,15 +3824,15 @@ bassFuzz = \relative c' { %\autoBeamOff
 }   \key c \major {
   R2. |
 }   \key cis \major {
-  r4. r16 gis8. ~ gis16 fis ~ |
+  r8 fis8 ~ fis8. gis8. ~ gis16 fis ~ |
 }   \key c \major {
-  fis4 r4 \times 4/5 { cis'8^\< b ais gis ais } |
+  fis4 gis8 r \times 4/5 { cis8^\< b ais gis ais } |
 }}
 
 bassFuzzWords = \lyricmode {
   Why oh why
   Why I
-  oh why
+  why oh why oh
   o -- ver the rain -- bow
 }
 
@@ -3826,7 +3844,9 @@ marksDenouement = {
   \mark "rit."
   \unfoldChange #80 #60 #32
   \tempo 4=60
-  s1*3 \bar "|."
+  s1*2
+  \mark "(seagull and ocean obligato)"
+  s1 \bar "|."
 }
 
 sopranoDenouement = \relative c'' { %\autoBeamOff
@@ -3842,9 +3862,9 @@ sopranoDenouement = \relative c'' { %\autoBeamOff
   e2\!^\< fis |
   gis ais^\> |
   bis1^\p |
-  R1 |
-  r4 dis dis' cisis ~ |
-  cisis2 r2 |
+  gis,2^\pp gis2 |
+  gis1^\< ~ |
+  << { gis1 } { s2..^\> s8\! } >> |  
 }}
 
 sopranoDenouementWords = \lyricmode {
@@ -3853,7 +3873,7 @@ sopranoDenouementWords = \lyricmode {
   birds fly %{ o py %} o -- ver the rain -- bow
   why oh why can't I if hap -- py lit -- tle
   why oh why can't I
-  some -- where o
+  why can't I
 }
 
 mezzoDenouement = \relative c' { %\autoBeamOff 
@@ -3896,9 +3916,10 @@ altoDenouement = \relative c' { %\autoBeamOff
   b2\!^\< ais |
   b cis^\> |
   bis1^\p |
-  gis2^\pp gis2 |
-  gis1^\< ~ |
-  << { gis1 } { s2..^\> s8\! } >> |  
+  R1 |
+  \clef treble
+  r4 dis' dis' cisis ~ |
+  cisis2 r2 |
 }}
 	
 altoDenouementWords = \lyricmode {
@@ -3906,7 +3927,7 @@ altoDenouementWords = \lyricmode {
   fly o
   why oh why can't I if hap
   why oh why can't I
-  why can't I
+  some -- where o
 }
 
 tenorDenouement = \relative c { %\autoBeamOff

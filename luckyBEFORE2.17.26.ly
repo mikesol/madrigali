@@ -410,7 +410,7 @@ soprano = \relative c''' { #(set-accidental-style 'neo-modern)
   f8
   b8
   \saNormal
-  \hairlen #4 gis,4..^\sfp^\< ~ \stemDown gis16 \bendAfter #3 \stemNeutral
+  \hairlen #4 gis,4..^\sfp^\< ~ \bendAfter #3 \stemDown gis16 \stemNeutral
   \ziggliss \glisslen #6 b,4.^\sfp^\< \glissando \grace { \override Stem #'stencil = ##f <\parenthesize gis'>4 \glissando } |
   \revert Stem #'stencil
   ees'8-.^\mf ges-. ees-. des-. ees-. des-. bes-. des-. bes-. aes-. |
@@ -526,7 +526,7 @@ soprano = \relative c''' { #(set-accidental-style 'neo-modern)
   R2 |
   R1 |
   \cricket
-  \tri c,8^\mf \bendAfter #3  \tri c16 \bendAfter #-2 c
+  \tri \bendAfter #3 c,8^\mf \tri \bendAfter #-2 c16 c
     \saNormal c-\staccatissimo f'-\staccatissimo aes-\staccatissimo bes^\p^\<^\lightSaberFRENCH \glissando (
     s16*2/3 a,16*2/3^\f ) ees'16*2/3^\mp \cricket c,16*2/3 \saNormal f''8*2/3^\lightSaberFRENCH^\p^\< \glissando (
     s16 g,^\f ) bes,16-\staccatissimo^\mf d,-\staccatissimo |
@@ -571,22 +571,22 @@ soprano = \relative c''' { #(set-accidental-style 'neo-modern)
   \cricket \tri c,32 \tri c \saNormal ees \cricket \tri c \saNormal g''16-\staccatissimo \cricket \air c,, \saNormal % ugh, use unpure pure container here...
     \times 4/5 { ges'16^\> f' g a f }
     d,16 d d''8^\p^\< \glissando
-    s16 s32 %{ GLISS %} e,,^\f \once \override TupletNumber #'text = #tuplet-number::calc-fraction-text \times 6/8 { dis'16 dis, cis dis b''-> gis, dis'\bendAfter #'2  g,-> \glissando }
+    s16 s32 %{ GLISS %} e,,^\f \once \override TupletNumber #'text = #tuplet-number::calc-fraction-text \times 6/8 { dis'16 dis, cis dis b''-> gis, \bendAfter #'2 dis' g,-> \glissando }
     %%% GLISS
     s8*4/7 a16*4/7 cis16*4/7 dis,16*4/7 cis16*4/7 \cricket \tri c16*4/7
-    \times 2/3 { \times 2/3 { \cricket \tri c16 \saNormal e cis' } b8 \bendInto e-> \bendAfter #-2 }
+    \times 2/3 { \times 2/3 { \cricket \tri c16 \saNormal e cis' } b8 \bendInto \bendAfter #-2 e-> }
     c32 c a a d,16 b'
   \times 2/3 { \times 2/3 { cis16 cis cis } \feelingLucky \once \override NoteHead #'stencil = #(make-spermazoid-rel '((69 68 70 67 59 52 )(52 31 45 43 62 )(68 26 49 56 62 )(35 36 50 42 63 )(46 53 42 46 65 )37) '(5 . 0.95034153343) '(4 . 0.173998007089) #f (lambda (x) (/ x 1)))
     g8^\sfz^\markup \fontsize #-2 \parenthesize \note #"8" #UP \saNormal cis \glissando }
-    cis,16 \bendInto fis' \bendAfter #-2  \times 2/3 { r16 dis'8^\> \glissando }
+    cis,16 \bendInto \bendAfter #-2 fis' \times 2/3 { r16 dis'8^\> \glissando }
     \once \override TupletNumber #'text = #tuplet-number::calc-fraction-text
-    s16*4/7 f,,16*4/7^\mp f8*4/7 c'8*4/7 \cricket \air \noAcc c,4*4/7 \saNormal gis''4*4/7\bendAfter #-4
+    s16*4/7 f,,16*4/7^\mp f8*4/7 c'8*4/7 \cricket \air \noAcc c,4*4/7 \saNormal \bendAfter #-4 gis''4*4/7
   \times 4/7 { dis16^\< ais' gis eis cis \feelingLucky
    \once \override NoteHead #'stencil = #(make-spermazoid-rel (crude-bloat-x (crude-bloat-y '((50 30 30 20 60 20) (70 40 40 40 10) (40 10 40 10 0) (20 10 -10 10 -20) (20 30 -60 10 -120) 10) 5) 2) '(4 . 0.95034153343) '(3 . 0.173998007089) #t (lambda (x) 0))
    \once \override Script #'X-offset = #0
    \once \override Script #'Y-offset = #3.5
    dis4*7/4->^\f^\>^\markup \fontsize #-2 \parenthesize \note #"4.." #UP \saNormal cis'16 dis \glissando }
-   c,,^\mp aes' ges32 aes des,16 \times 2/3 { fis' fis cis8^\f-> \bendAfter #-3 ais8 ~ }
+   c,,^\mp aes' ges32 aes des,16 \times 2/3 { fis' fis \bendAfter #-3 cis8^\f-> ais8 ~ }
    \times 2/3 { ais32 \cricket \tri c,32 \saNormal a'8 bes, c16 } \times 4/6 { e g e \cricket \tri c8-\staccatissimo \saNormal d''16^\mp ( }
    e8 ) e,,-\staccatissimo
       d''4^\p |
@@ -701,15 +701,15 @@ sopranoGlissando = \relative c'' {
   s2. b4 |
   s1 |
   \autoBeamOff \override Accidental #'stencil = ##f
-  \override Voice . Glissando .bound-details.right.padding = #0
+  \override Voice . Glissando #'bound-details #'right #'padding = #0
   \override NoteHead #'stencil = #empty-stencil
   \override NoteHead #'style = #'harmonic
   s4 s8 s8*2/5 \noStem d8*3/5^\mp^\< \glissando \stemDown
-  \override Voice . Glissando .bound-details.left.padding = #0
+  \override Voice . Glissando #'bound-details #'left #'padding = #0
   e4 \glissando e \glissando |
   e \glissando f \glissando f \glissando e8 \glissando
-  \revert Voice . Glissando .bound-details.right.padding
-  \noStem d8^\f |  \revert Voice . Glissando .bound-details.left.padding
+  \revert Voice . Glissando #'bound-details #'right #'padding
+  \noStem d8^\f |  \revert Voice . Glissando #'bound-details #'left #'padding
   s2. \stemDown e,16 s8. |
   \revert NoteHead #'stencil
   \revert NoteHead #'style
@@ -719,20 +719,20 @@ sopranoGlissando = \relative c'' {
   s4 \times 4/7 { a8 s8 s8 \stemInv c,16 } s4 s4 |
   s2 \times 4/7 { \stemDown d'16 s16 s8 s8 s4 \stemInv gis4 }
   s1 |
-  \override Voice . Glissando .bound-details.right.padding = #0
+  \override Voice . Glissando #'bound-details #'right #'padding = #0
   s2. \noStem d'4 \glissando | \stemNeutral
-  \override Voice . Glissando .bound-details.left.padding = #0
+  \override Voice . Glissando #'bound-details #'left #'padding = #0
   \override NoteHead #'stencil = #empty-stencil
   \override NoteHead #'style = #'harmonic
   d\glissando d\glissando d\glissando d\glissando |
   d\glissando c\glissando c\glissando c\glissando |
   d\glissando c\glissando c\glissando c\glissando |
-  \revert Voice . Glissando .bound-details.right.padding
+  \revert Voice . Glissando #'bound-details #'right #'padding
   c\glissando
   \revert NoteHead #'stencil
   \revert NoteHead #'style
   \noStem c8 s8 s2 |
-  \revert Voice . Glissando .bound-details.left.padding
+  \revert Voice . Glissando #'bound-details #'left #'padding
 }
 
 sopranoWords = \lyricmode {
@@ -834,7 +834,7 @@ sopranoWords = \lyricmode {
 alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \autoBeamOff
   \feelingLucky
-  \footnote \markup { "" } #'(0 . 0) \noteHeadFRENCH NoteHead
+  \footnote \markup { "" } #'(0 . 0) #'NoteHead \noteHeadFRENCH
   \once \override NoteHead #'stencil =
   #(make-spermazoid '((100 100 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) 100) '(5 . 0.2) '(3 . 0.4) #f (lambda (x) (/ x 4)))
   b4^\mp
@@ -935,7 +935,7 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   r4. \tri c8^\dentistFRENCH^\f ~ \tri c2 ~ |
   \tri c2 ~ |
   \times 2/3 { \tri c4 r8 } r4 |
-  \saNormal r16 \noLed g'''8.^\mp^\pterosaurFRENCH %{tarydactyl%} ~ g4 \bendAfter #-2 |
+  \saNormal r16 \noLed g'''8.^\mp^\pterosaurFRENCH %{tarydactyl%} ~ \bendAfter #-2 g4 |
   R2 |
   \saNormal
   bes,,4 ees8. f16 ees8 des des4 |
@@ -1039,7 +1039,8 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
     \cricket c,4^\beeFRENCH ~
     \times 2/3 { c8 \saNormal eis16-. } fis8-. |
   \once \override BendAfter #'stencil = #bend-into::print
-  \times 2/3 { f^\f^\markup \italic "cf soprano" \bendAfter #3 ees4 }
+  \bendAfter #3
+  \times 2/3 { f^\f^\markup \italic "cf soprano" ees4 }
     ees8-. aes32 \ziggliss des,16. \glissando
     s4*2/3 g8*2/3-.
     \acciaccatura { g16 } \goalposts \stemTrans
@@ -1114,7 +1115,7 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
      g4*2/3 } \stemNeutral \saNormal \revert NoteHead #'stencil cis16^\mp e, \cricket \tri c \saNormal \acciaccatura { f } e8->^\sf ~ e16 \glissando |
   \times 4/6 { b'16 a gis fis8 gis32 ( \glissando dis ) }
     \times 4/5 { dis8 ais'16 ais' bis ~ }
-    bis32-\staccatissimo \bendAfter #-2  eis,,16 cis d32 d fis
+    \bendAfter #-2 bis32-\staccatissimo eis,,16 cis d32 d fis
     \times 2/3 { e8^\> d e\mp } |
   \feelingLucky
   r8
@@ -1155,14 +1156,14 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \times 4/6 { cis'^\mp cis'8-\staccatissimo a16 ais8^\sfp^\< \glissando }
     %{GLISS%} s8*2/3 ais,8*2/3^\f \glissando fis'8*2/3-.
     fis,16 cis' a32^\> a gis gis
-    \times 2/3 { cis4^-^\mp^\cawFRENCH \bendAfter #-2  eis,16 fis } |
+    \times 2/3 { \bendAfter #-2 cis4^-^\mp^\cawFRENCH eis,16 fis } |
   \once \override TupletNumber #'text = #tuplet-number::calc-fraction-text
-  \times 11/18 { bes8.^-^\<\bendAfter #3  a16 aes g bes8.^- \bendAfter #5 a16 aes g bes8.^- \bendAfter #8 a16 aes g } bes16^\ff
+  \times 11/18 { \bendAfter #3 bes8.^-^\< a16 aes g \bendAfter #5 bes8.^- a16 aes g \bendAfter #8 bes8.^- a16 aes g } bes16^\ff
     g'8^\> \glissando \times 2/3 { g, f'16^\p } |
   \times 4/6 { cis'16-\staccatissimo cis-\staccatissimo ais,-\staccatissimo gis8-\staccatissimo ais'16 }
     b8^\< \glissando fis,16^\f fis
     \times 4/5 { cis''8^\mp ais,16 gis gis }
-    \times 4/5 { cis, eis'4^\espressivo \bendAfter #-3 } |
+    \times 4/5 { cis, \bendAfter #-3 eis'4^\espressivo } |
   \times 4/5 { r8 f16^\mf cis b }
     b g'8 \glissando b,32 cis b8-\staccatissimo cis-> \glissando (
     dis16 ) ais ais ais' \glissando ( |
@@ -1171,7 +1172,7 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   r4 r16 c c8 c16 r8. r8 c16 c |
   r8. c16 c \tri c8.^\f ~ \tri c8 c16^\mf c r4 |
   r2.
-  \footnote \markup { "" } #'(0 . 0) \appoxFRENCH NoteHead
+  \footnote \markup { "" } #'(0 . 0) #'NoteHead \appoxFRENCH
   \feelingLucky \clef treble \override NoteHead #'style = #'default
       %\once \override NoteHead #'stencil =
       % #(make-spermazoid-rel '((51 52 55 52 57 52 )(35 49 54 52 56 )(34 53 58 53 60 )(68 55 61 55 61 )(30 59 61 62 62 )34) '(5 . 0.835281875121) '(4 . 0.920967394837) #t (lambda (x) (/ x 1)))
@@ -1356,19 +1357,19 @@ altoGlissando = \relative c'' {
   s4 f, g a |
   b s b s |
   s1 |
-  \override Voice . Glissando .bound-details.right.padding = #0
+  \override Voice . Glissando #'bound-details #'right #'padding = #0
   
   s8. \noStem des'16^\mp^\< \glissando
 \override NoteHead #'stencil = #empty-stencil
   \override NoteHead #'style = #'harmonic
 
-  \override Voice . Glissando .bound-details.left.padding = #0
+  \override Voice . Glissando #'bound-details #'left #'padding = #0
 
 \stemDown e4 \glissando e \glissando e \glissando |
   e \glissando f \glissando f \glissando e \glissando |
-  \revert Voice . Glissando .bound-details.right.padding
+  \revert Voice . Glissando #'bound-details #'right #'padding
   \noStem d8^\f s8 s2. |
-  \revert Voice . Glissando .bound-details.left.padding
+  \revert Voice . Glissando #'bound-details #'left #'padding
   \revert NoteHead #'stencil
   \revert NoteHead #'style
   s1 |
@@ -1492,7 +1493,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   R1 |
   \tNormal
   ees,2^\f^\frenchFRENCH \ziggliss b'4..^\mp^\< ( \glissando gis'16-. ) |
-  cis16-.^\mf\bendAfter #-2 
+  \bendAfter #-2 cis16-.^\mf
   \cricket
   c,^\f c8 \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } |
   \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } |
@@ -1521,7 +1522,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
     \tri c16 %{wuh%} \tri c8.^\spitFRENCH^\espressivo %{tchiou%} |
   \tri c8-\staccatissimo %{t%} \tri c32 \tri c32 \tri c32 \tri c32 %{d m d m%} 
     \saNormal b''16^\p %{dih%} cis8^\< %{diou%} \glissando dis,,16^\f %{ɢe%}
-    \times 2/3 { \cricket \tri c8^\mf %{t%} \air c^\inhaleFRENCH %{inspiration%} \saNormal  a''8^\f \bendAfter #-3 %{bim%} }
+    \times 2/3 { \cricket \tri c8^\mf %{t%} \air c^\inhaleFRENCH %{inspiration%} \saNormal \bendAfter #-3 a''8^\f %{bim%} }
     \cricket \tri c,,8-\staccatissimo %{t%} \saNormal fis16-.^\mf^\espressivo %{dim%} \cricket \tri c16
   \tri c4^\ff %{^\ouPersistF%} %{r rolled from ou to i vowel %}
     \tNormal b'16^\mp ^\puckerFRENCH %{lip smacking ... mim%} g %{mum%} \cricket \tri c, %{m%} \tri c %{m%}
@@ -1551,7 +1552,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   R2 |
   \cricket
   r2. r16 \tri c,8. ~ |
-  \tri c4 c8\bendAfter #-2  r8 r2 |
+  \tri c4 \bendAfter #-2 c8 r8 r2 |
   r2 r8 c8^\slowDiphthongFRENCH ~ c4 ~ |
   c4 r4 c2 |
   r4 c4 ~ c4. r8 |
@@ -1573,7 +1574,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   \once \override TupletNumber #'text = #(markup #:note "4." UP "+" #:note "8" UP)
   bes8^\f bes g |
   R4. |
-  fis'16^\mp^\asiaFRENCH dis8 fis8. \bendAfter #-2 |
+  fis'16^\mp^\asiaFRENCH dis8 \bendAfter #-2 fis8. |
   e8. fis8 b,16 ~ |
   b cis8 \feelingLucky
     \once \override NoteHead #'stencil =
@@ -1595,7 +1596,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   %#(make-spermazoid-rel '((44 43 65 43 35 40 )(58 54 70 31 52 )(53 69 42 63 61 )(47 66 43 43 33 )(67 46 37 67 67 )43) '(5 . 0.559975537335) '(4 . 0.332823777941) #t (lambda (x) (/ x 709)))
   a,8*4/5^\p^\<
   %\once \override NoteHead #'stencil = 
-  %#(make-spermazoid-rel '((45 38 55 62 64 50 )(50 31 65 50 34 )(62 56 49 64 35 )(49 45 31 42 62 )(64 58 46 45 33 )30) '(5 . 0.472765497143) '(4 . 0.579762043746) #t (lambda (x) (/ x 589)))
+  #(make-spermazoid-rel '((45 38 55 62 64 50 )(50 31 65 50 34 )(62 56 49 64 35 )(49 45 31 42 62 )(64 58 46 45 33 )30) '(5 . 0.472765497143) '(4 . 0.579762043746) #t (lambda (x) (/ x 589)))
   a8*4/5
   %\once \override NoteHead #'stencil = 
   %#(make-spermazoid-rel '((67 43 37 41 63 35 )(44 54 31 58 49 )(43 57 66 32 58 )(67 53 65 57 48 )(57 53 34 45 61 )40) '(5 . 0.917747079026) '(4 . 0.405550027237) #t (lambda (x) (/ x 816)))
@@ -1632,7 +1633,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   r2. r4^\fermata |
   R1 R1 R1 R1 R1 |
   r2. r8.. \tri c32^\f |
-  r16 \tri c r \times 2/3 { c c \tNormal g' ~ } g \bendAfter #-2 a32 fis d e
+  r16 \tri c r \times 2/3 { c c \tNormal g' ~ } \bendAfter #-2 g a32 fis d e
   \times 2/3 { b'16 fis b, } \feelingLucky \clef bass 
     \once \override NoteHead #'stencil =
     #(make-spermazoid-rel (crude-bloat-y '((40 20 35 15 20 20 )(20 20 20 20 25 )(20 20 30 20 45 ) 50) 10) '(5 . 0.510373565022) '(4 . 0.278404683716) #f (lambda (x) (/ x 1)))
@@ -1685,12 +1686,12 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   c4 c4 ~ c4. r8 |
   R1 |
 		  %{\goalposts \clef treble \stemNeutral \revert NoteHead #'style
-		  r8 \noLed e''4.^\pterosaurFRENCH ~ e2 \bendAfter #-2  |%}
+		  r8 \noLed e''4.^\pterosaurFRENCH ~ \bendAfter #-2 e2 |%}
   \tNormal
   r8 c'8 \times 2/3 { d,8 ( a'8. ) r16 } fis,4.^\espressivo^\generatorFRENCH \feelingLucky
      \once \override NoteHead #'stencil = #(make-spermazoid-rel '((37 60 41 63 42 65 )(31 36 70 41 74 )(41 46 74 49 79 )(64 51 80 54 83 )(58 54 83 55 83 )41) '(5 . 0.690196564439) '(4 . 0.730624021345) #t (lambda (x) (/ x 4)))
          b4*1/2 \cricket |
-  \tri c4^\ff \tNormal \times 8/9 { d8^\mp^\closedFRENCH ( \glissando gis16-. ) a b c e,8^\< ( \glissando a16\f ) } a \cricket \tri \footnote \markup { "" } #'(0 . 0) \upsideDownFRENCH NoteHead c,^"*" \tri c \tri c |
+  \tri c4^\ff \tNormal \times 8/9 { d8^\mp^\closedFRENCH ( \glissando gis16-. ) a b c e,8^\< ( \glissando a16\f ) } a \cricket \tri \footnote \markup { "" } #'(0 . 0) #'NoteHead \upsideDownFRENCH c,^"*" \tri c \tri c |
   \tri c16 c16 \feelingLucky \clef "treble_8"
      \once \override NoteHead #'stencil = #(make-spermazoid (crude-bloat-y '((100 0 70 200 70 130) (100 150 70 80 20) 100) 6) '(5 . 0.2) '(3 . 0.4) #t (lambda (x) 0))
       b4^\markup \fontsize #-2 \parenthesize \note #"4" #UP \cricket \tri c16 \tri c
@@ -1989,7 +1990,7 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   R2
   \normalG
   \bNormal
-  ees,4^\f ~ \stemDown ees16 \bendAfter #3  \stemNeutral c8.\rest r2 |
+  ees,4^\f ~ \stemDown \bendAfter #3 ees16 \stemNeutral c8.\rest r2 |
   \clef treble
   r16 cis''^\toSopranoFRENCH^\mf fis b, f' b, dis gis \times 2/3 { eis8 cis gis' } |
   \times 2/3 { a,8-. r gis' ( ~ }
@@ -2044,15 +2045,15 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   \override NoteHead #'style = #'triangle
   \times 2/3 { b'4^\f^\moreSpitFRENCH d8 }
     r4
-    \footnote "*" #'(0.5 . 0.5) \kFRENCH NoteHead
-    \once \override Glissando .bound-details.right.padding = #0
-    \tightG c8.*1/3 \glissando \hideNotes \once \override Glissando .bound-details.left.padding = #0 a16 \glissando c16 \unHideNotes r16 \normalG
+    \footnote "*" #'(0.5 . 0.5) #'NoteHead \kFRENCH
+    \once \override Glissando #'bound-details #'right #'padding = #0
+    \tightG c8.*1/3 \glissando \hideNotes \once \override Glissando #'bound-details #'left #'padding = #0 a16 \glissando c16 \unHideNotes r16 \normalG
 \goalposts
     c4-\staccatissimo^\sfz
   c4
     r16 e8.
     r4
-    \footnote "†" #'(0.5 . 0.5) \hFRENCH NoteHead
+    \footnote "†" #'(0.5 . 0.5) #'NoteHead \hFRENCH
     \times 2/3 { b4^\sfz d8 }
   \times 2/3 { c16 g8 c16 a8 }
     c4-\staccatissimo | 
@@ -2115,7 +2116,7 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     \once \override NoteHead #'stencil =
     #(make-spermazoid-rel (crude-bloat-x '((31 59 31 34 40 33 )(70 70 45 62 57 )(46 39 44 30 30 )33) 3) '(5 . 0.238608679095) '(4 . 0.680002709505) #t (lambda (x) (/ x 1)))
     g4*1/2
-  } \cricket c16. \saNormal a''16.^\p^\<\bendAfter #-3 
+  } \cricket c16. \saNormal \bendAfter #-3 a''16.^\p^\<
   \bNormal b,,,16^\sfz \cricket c'32^\mp c c16
   \clef bass \feelingLucky
   \once \override TupletNumber #'text = #(markup #:note "4." UP)
@@ -2144,7 +2145,7 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   \tNormal
   r2. \times 2/3 { r4 aes'8^\f } |
   \saNormal e''16. ( \glissando fis,,32 ) \cricket \tri c32 \tri c \tri c \tri c
-    \saNormal \acciaccatura { e'16 } gis,16. ~ gis32 \glissando a'16 \bendAfter #-3 cis,,16
+    \saNormal \acciaccatura { e'16 } gis,16. ~ gis32 \glissando \bendAfter #-3 a'16 cis,,16
     \times 4/6 { \cricket \tri cis-\staccatissimo \tNormal cis-\staccatissimo f-\staccatissimo b-\staccatissimo gis-\staccatissimo e'-\staccatissimo } \times 2/3 { a,-\staccatissimo r \cricket c,8-- c-- }
   r2. r8 \times 2/3 { r8 }
   \feelingLucky
@@ -2243,9 +2244,9 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     \revert Stem #'stencil
 
 
-  %r4 \times 2/3 { r4 c8^\ff^\shoutFRENCH ~ } c2 \bendAfter #-2 |
+  %r4 \times 2/3 { r4 c8^\ff^\shoutFRENCH ~ } \bendAfter #-2 c2 |
   %r2 r8 c4.^\sim ~ |
-  %c4 \bendAfter #-2 r4
+  %\bendAfter #-2 c4 r4
   r2
   \tri c'2^\ff^\waveFRENCH ~ |
   c4. r8
@@ -2267,9 +2268,9 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   \once \override NoteHead #'stencil = #(make-spermazoid-rel '((49 70 49 70 49 74 )(49 40 74 41 75 )(45 43 75 46 75 )(38 47 76 50 78 )(62 50 78 54 79 )44) '(5 . 0.176546845478) '(4 . 0.801049778201) #t (lambda (x) (/ x 1)))
     e4*3/2^\markup \fontsize #-2 \parenthesize \note #"4." #UP
     \tNormal \revert NoteHead #'stencil cis8^_
-    eis^_ dis4^\espressivo \bendAfter #2  \saNormal ais''8^\> \glissando |
+    eis^_ \bendAfter #2 dis4^\espressivo \saNormal ais''8^\> \glissando |
   %{GLISS%} s8 dis,,16^\p cis16--
-    r8 b8.^\mf\bendAfter #3  r16  cis8.\bendAfter #4 r16 d8 \bendAfter #3 |
+    r8 \bendAfter #3 b8.^\mf r16 \bendAfter #4 cis8. r16 \bendAfter #3 d8 |
   \bNormal
   r4 \times 2/3 { r4 f^\mp des } r8 \feelingLucky \once \override TupletNumber #'text = #(markup #:note "4." UP) \times 1/1 {
     \once \override NoteHead #'stencil = #(make-spermazoid-rel '((53 66 55 66 55 69 )(46 50 71 50 71 )(53 54 73 57 74 )(69 59 75 62 75 )(52 63 76 67 76 )35) '(5 . 0.0404376541608) '(4 . 0.067220116209) #t (lambda (x) (/ x 1)))

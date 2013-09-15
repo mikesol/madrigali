@@ -4,7 +4,8 @@
 \version "2.14.0"
 \include "defs-devel.ly"
 
-#(set-global-staff-size 17.82)
+%#(set-global-staff-size 17.82)
+#(set-global-staff-size 15.87)
 #(ly:set-option 'point-and-click #f)
 
 \paper {
@@ -26,6 +27,10 @@
   subtitle = "(star!)"
 }
 
+Red = \override NoteHead #'color = #red
+Black = \revert NoteHead #'color
+RedL = \override LyricText #'color = #red
+BlackL = \revert LyricText #'color
 
 sopNAME = #"Marie"
 sopSNAME = #""
@@ -360,7 +365,7 @@ marks = {
   s1 |  
   \tempo 4=96
   s1 |
-  s1*22 \bar "|."
+  s1*20 \bar "|."
   
 }
 
@@ -540,10 +545,11 @@ soprano = \relative c''' { #(set-accidental-style 'neo-modern)
     r4 |
   R1 |
   r2. r4^\fermata |
-  c'4^\p\glissando s2. |
-  s1 |
-  s2 des8 r8 r4 |
-  r2 r8 c8^\mp \glissando s4 |
+  %c'4^\p\glissando s2. |
+  %s1 |
+  %s2 des8 r8 r4 |
+  R1 | R1 |
+  r2 r8 c'8^\mp \glissando s4 |
   s1 |
   deseh4 \glissando s2. |
   s4 c4 r2 |
@@ -691,8 +697,8 @@ sopranoGlissando = \relative c'' {
   s1 |
   s1 |
   s1 |
-  s4 c4 c c |
-  c c c c |
+  %s4 c4 c c |
+  c4 c c c |
   c c s2 |
   s2. c4 |
   c c c c |
@@ -889,49 +895,110 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   #(make-spermazoid '((60 10 50 30 70 20) (50 40 -20 40 0) (50 40 40 40 20) (50 40 0 40 20) (50 40 60 40 40) (50 40 20 40 40) (50 40 80 20 250) 10) '(4 . 0.9) '(3 . 0.4) #t values)
 %  #(make-spermazoid (crude-bloat-x '((100 10 50 30 70 20) (50 40 -20 40 0) (50 40 40 40 20) (50 40 0 40 20) (50 40 60 40 40) (50 40 20 40 40) 20) 6) '(4 . 0.9) '(3 . 0.4) #f (lambda (x) (/ x 4)))
   \times 1/1 { c4 } 
-  R1 |
+  %R1 |
   \saNormal
-  des,8^-^\mf des^- des^- |
+  \Red
+  b'2.... r32 |
+  \Black
+  des,,8^-^\mf des^- des^- |
   \feelingLucky
   \once \override NoteHead #'stencil =
   #(make-spermazoid '((100 100 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) 100) '(5 . 0.2) '(3 . 0.4) #f (lambda (x) (/ x 4)))
   b'4^\mp
   \saNormal
-  r2 \times 2/3 { r8 b'2^\p^\espressivo r8 }
-  R1 |
+  \Red  e8^\f g e d e d  b'4^\p^\espressivo |
+  b,8 d b a b a a r |
+  \Black
   \cricket
-  c,,4-.^\f^\gruntFRENCH r \saNormal %<< { aes'2^^^\> \glissando | \stemDown
+  c,4-.^\f^\gruntFRENCH r \saNormal %<< { aes'2^^^\> \glissando | \stemDown
   %s2 \noLed g'4^\pp r4 r2 } \\ { s2 \noLed \override NoteHead #'transparent = ##t d4 e } >>
-  aes'2^^^\> \glissando ( | \stemDown
-  s2 \noLed g'4^\pp ) r4 r2
+  \stemDown \Red des'2^^^\> \glissando ( |
+  s2. \noLed d'2^\mp )
+  \stemNeutral
+  \noLed g,,,4^\lowFRENCH^\f \Black |
   \revert NoteHead #'no-ledgers
   \stemNeutral
-  c,,8 dis c b f'^\f ees c ees |
-  f ges f ees c bes c ees f ges f ees |
-  s4*6 s8. 
-  R1*7/8
-  R1*5/4
-  R2
-  % HERE
-  \cricket r2 r8 c^\mf c r8 |
-  %r2 \ziggliss d4^\f ( \glissando d'8-. ) r |
-  r4.. \tri c16 r2 |
-  %\cricket
-  %r4 \times 2/3 { c8^\f c4 } \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } |
-  %\times 2/3 { c8 c4 } \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } |
+  c8 dis c b \Red bes'^\f des ees des |
+  bes aes bes des ees ges ees des bes aes bes des |
+  \feelingLucky
+  \once \override NoteHead #'stencil =
+  #(make-spermazoid '((100 0 150 1400 70 230) (100 150 130 80 20) 100) '(5 . 0.2) '(3 . 0.4) #t (lambda (x) 0))
+  b4^\mp
+  \once \override NoteHead #'stencil =
+  #(make-spermazoid '((100 50 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) 10) '(5 . 0.2) '(3 . 0.4) #t values)
+  a4
+  d16
+  \once \override NoteHead #'stencil =
+  #(extend-base-note-head-backwards 200)
+  b8
+  \once \override NoteHead #'stencil =
+  #(make-spermazoid '((30 -20 30 -10 70 0) (100 50 70 150 400) 50) '(5 . 0.2) '(3 . 0.4) #f (lambda (x) (/ x 8)))
+  g4
+  \once \override NoteHead #'stencil =
+  #(ly:stencil-rotate (make-spermazoid '((30 0 30 50 30 100) (60 30 160 30 240) (30 30 300 30 380) (40 20 420 20 480) (20 10 500 10 502) 100) '(5 . 0.6) '(3 . 0.9) #t (lambda (x) 0)) 10 0 0)
+  c4
+  \once \override NoteHead #'stencil =
+  #(ly:stencil-rotate (make-spermazoid '((30 0 100 10 100 50) (60 15 160 10 300) (30 30 500 70 640) (40 100 680 150 680) 100) '(5 . 0.6) '(3 . 0.9) #t (lambda (x) (/ x 2))) 10 0 0)
+  d4
+  \once \override NoteHead #'stencil =
+  #(ly:stencil-rotate base-note-head-stencil -45 0 0)
+  f8
+  b8
+  \saNormal
+  \hairlen #4 gis,4..^\sfp^\< ~ \stemDown gis16 \bendAfter #3 \stemNeutral
+  \ziggliss \glisslen #6 b,4.^\sfp^\< \glissando \grace { \override Stem #'stencil = ##f <\parenthesize gis'>4 \glissando } |
+  \revert Stem #'stencil
+  ees'8-.^\mf ges-. ees-. des-. ees-. des-. bes-. des-. bes-. aes-. |
   \cricket
-  r2.. c16^\f c |
+  c,^\f^\laughterFRENCH c c c | % used to use \cross ... but confusing w/ percussive effects
+  \saNormal
+  \times 2/3 { e'8-\staccatissimo \ziggliss d,2 ( \glissando d''8-. ) }
+  \times 2/3 { \ziggliss d,,4 ( \glissando d''8-. ) \tri \Black \cricket c,,^\mf c  \Red \tri c8-\staccatissimo %{tch%} } |
+  \saNormal
+  ees,2^\f^\frenchFRENCH \ziggliss b'4..^\mp^\< ( \glissando gis'16-. ) |
+  cis16-.^\mf\bendAfter #-2 
+  \cricket
+  c,^\f c8 \times 2/3 { c8 c4 } \times 2/3 { c8 c4 } c8 \Black
+  c16 c |
   \times 2/3 { c4 c8 } \times 2/3 { c4 c8 ~ } \times 2/3 { c8 r4 } |
   \saNormal
   fis'16-. \ziggliss cis,4. ( \glissando ais''16-. ) |
-  R1 |
-  R2. |
-  R1 |
-  R1 |
-  \cricket 
-  r8. \tri c,,16-\staccatissimo r4 r2 |
-  r4 \tri c-\staccatissimo r2 |
-  R1 |
+  \cricket
+  \Red
+  r8 \tri c,,8
+\saNormal c'2.^\mp ~ |
+  c16 g'^\mf^\squirrelFRENCH e d e d b d b a gis \cricket \tri c,16 %{χ%} |
+  \times 2/3 { \tri c8-. %{ç%} \saNormal d'16 %{ni%} \cricket \tri c, %{p%} \tri c16-. %{t%} r32 \saNormal \hairlen #4 b''^\p^\< %{di%} ~ }
+    \times 2/3 { b4^\f  \glissando d,,8^\spanishRFRENCH %{rou (r roulé)%} \glissando }
+    \times 4/5 { e'8-\staccatissimo %{ih%} dis'-\staccatissimo %{fiht%} \hairlen #4 e16^\p^\< %{di%} \glissando }
+    d,,8\f %{ou%} \cricket \tri c16 %{ɬ%} \tri c %{ɬ%} 
+  \times 4/5 { \tri c8-\staccatissimo^\mf  %{t%} \feelingLucky
+      \once \override TupletNumber #'text = #(markup #:note "8" UP)
+      \once \override NoteHead #'stencil =
+      #(make-spermazoid '((20 0 40 00 55 10) (30 20 80 40 170) (30 05 210 05 215)  100) '(4 . 0.2) '(4 . 0.1) #f (lambda (x) (/ x 4)))
+      c^\markup \parenthesize \fontsize #-2 \note #"8" #UP %\times 1/1 { c } %{oui%}
+        \cricket \tri c16-\staccatissimo %{q%} }
+    \revert TupletNumber #'text
+    \revert TupletNumber #'Y-offset
+    \times 2/3 { r8 \tri c16-. %{t%} }
+      \feelingLucky
+%      \once \override TupletNumber #'text = #(markup #:note "8" UP)
+      \once \override NoteHead #'stencil =
+      #(make-spermazoid '((20 0 40 00 55 10) (30 20 80 40 170) (30 05 210 05 215)  100) '(4 . 0.2) '(4 . 0.1) #t (lambda (x) (/ x 4)))
+      c8^\markup { \parenthesize \fontsize #-2 \note #"8" #UP } %{oui%} %\times 1/1 { c8 } %{oui%}
+    \saNormal \times 2/3 { aes'8^\f %{doum%} f %{doum%} \cricket \tri c^\mf %{t͡ʃç%} }
+    \tri c16 %{wuh%} \tri c8.^\spitFRENCH^\espressivo %{tchiou%} |
+  \tri c8-\staccatissimo %{t%} \tri c32 \tri c32 \tri c32 \tri c32 %{d m d m%} 
+    \saNormal b''16^\p %{dih%} cis8^\< %{diou%} \glissando dis,,16^\f %{ɢe%}
+    \times 2/3 { \cricket \tri c8^\mf %{t%} \air c^\inhaleFRENCH %{inspiration%} \saNormal  a''8^\f \bendAfter #-3 %{bim%} }
+    \cricket \tri c,,8-\staccatissimo %{t%} \saNormal fis16-.^\mf^\espressivo %{dim%} \cricket \tri c16
+  \tri c4^\ff %{^\ouPersistF%} %{r rolled from ou to i vowel %}
+    \tNormal b'16^\mp ^\puckerFRENCH %{lip smacking ... mim%} g %{mum%} \cricket \tri c, %{m%} \tri c %{m%}
+    \tri c %{s%} \tri c %{t%} r8
+    r4 |
+   r8 \tri c4.^\f ~ %{ç%} \tri c2 %{dentist%} |
+
+\Black
   r4. \tri c8^\dentistFRENCH^\f ~ \tri c2 ~ |
   \tri c2 ~ |
   \times 2/3 { \tri c4 r8 } r4 |
@@ -939,11 +1006,24 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   R2 |
   \saNormal
   bes,,4 ees8. f16 ees8 des des4 |
-  ges4 f8 ees ces r8 r4 %ees16. f32 ees8 des |
-  R1 %des bes ces des ees des r4 |
+  ges4 f8 ees ces r8
+  \feelingLucky
+  \Red
+  \override TupletNumber #'text = #(markup #:note "2" UP)
+  \times 1/1 { r8   \once \override NoteHead #'stencil =
+    #(ly:stencil-rotate (make-spermazoid '((30 0 100 10 100 50) (60 50 80 70 150) (30 70 250 70 270) 50) '(5 . 0.6) '(3 . 0.9) #t (lambda (x) (/ x 2))) 10 0 0)
+  c4*3/2 }
+  \times 1/1 { r8   \once \override NoteHead #'stencil =
+    #(make-spermazoid '((20 0 40 00 55 10) (30 20 80 40 130) (30 25 170 25 210)  100) '(4 . 0.2) '(4 . 0.1) #f (lambda (x) (/ x 2)))
+    c4*3/2 } r4 |
+  \saNormal
+  \Black
   g8^\mf g e |
+  \cricket s4 s4 s4 \Red
+\miniSustainG   \once \override Glissando.color = #red
+c1*9/8 \glissando \hideNotes c8 \unHideNotes \Black
   \monologue
-  $(skip-of-length powerText)
+  %$(skip-of-length powerText)
   \FatText \MonoShift
   \override TextScript #'whiteout = ##t
   s4^"You" \bar "" s4^"get" \bar "" s4^"power" \bar "" s4^"with" \bar "" s4^"nine" \bar "" s4^"stars" \bar ""
@@ -956,13 +1036,65 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \times 4/6 { c'16 bes ees, f bes, c }
   \times 4/6 { ees f bes c ees f }
   c'4-. |
-  R1 |
+\Red
+  d4-.^\mp
+  \feelingLucky
+  \override TupletNumber #'text = #(markup #:note "2" UP)\times 1/1 { r16
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid (crude-bloat-y (crude-bloat-x '((60 10 50 40 70 25) (50 40 -25 40 10) (50 60 40 40 30) (50 40 -10 40 40) (50 40 80 40 30) (50 40 10 40 60) (50 40 120 20 80) (50 40 50 40 100) (50 40 160 40 100) (50 40 120 40 200) 10) 3) 1.0) '(4 . 0.9) '(3 . 0.4) #f values)
+    c,4*7/4 } %r16 }
+    \override TupletNumber #'text = #(markup #:note "4" UP)
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid (crude-bloat-y (crude-bloat-x '((60 10 50 40 70 25) (50 40 -25 40 10) (50 60 40 40 30) (50 40 -10 40 40) (50 40 80 40 30) (50 40 10 40 60) (50 40 120 20 80) (50 40 50 40 100) (50 40 160 40 100) (50 40 120 40 200) 10) 3) 1.0) '(4 . 0.9) '(3 . 0.4) #t values)
+      \times 1/1 { c4 }
+  \times 1/1 { r8 d' }
+    \cricket c,,4 ~ c8
+    \feelingLucky
+    \stemDown
+    \revert NoteHead #'style
+    \clef bass
+    \override TupletNumber #'text = #(markup #:note "4." UP)
+    \once \override NoteHead #'stencil =
+      #(make-spermazoid-rel '((60 0 30 10 20 10) (60 40 10 40 10) (60 20 30 10 30) 40) '(5 . 0.3) '(3 . 0.4) #f (lambda (x) (/ x 2)))
+      \times 1/1 { e,4*3/2^\veryLowFRENCH^\mf } |
+    \override TupletNumber #'text = #(markup #:note "4" UP)
+      \times 1/1 { g4 }
+    \once \override NoteHead #'stencil =
+      #(make-spermazoid-rel '((60 0 30 10 20 10) (60 40 5 40 5) (60 20 5 10 5) 40) '(5 . 0.3) '(3 . 0.4) #f values)
+      \times 1/1 { f4 }
+      \times 1/1 { e }
+    \once \override NoteHead #'stencil =
+      #(make-spermazoid-rel '((60 0 40 15 22 18) (50 40 15 40 25) (30 20 5 11 5) 40) '(5 . 0.3) '(4 . 0.1) #f (lambda (x) (/ x 2)))
+      \times 1/1 { g } |
+    \override TupletNumber #'text = #(markup #:note "4." UP)
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel '((34 33 41 63 43 46 )(51 49 51 58 33 )(43 40 39 38 56 )(32 39 56 63 69 )(58 30 10 61 10 ) 100) '(5 . 0.84447059349) '(4 . 0.657834203427) #t (lambda (x) (/ x 342)))
+    \times 1/1 { g4 r8 }
+    \override TupletNumber #'text = #(markup #:note "2" UP)
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel '((41 33 34 33 38 51 )(64 41 63 51 60 )(57 62 49 35 34 )(70 55 30 46 49 )(53 48 61 37 55 )41) '(5 . 0.242923994359) '(4 . 0.610133182876) #f values)
+    \times 1/1 { b,4*2 }
+    \override TupletNumber #'text = #(markup #:note "8" UP "+" #:note "8" UP)
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel '((61 36 34 35 47 30 )(69 48 45 59 38 )(62 52 62 45 45 )(54 62 -33 45 -30 )(36 59 -59 65 -56 )46) '(5 . 0.41300429464) '(4 . 0.318867695653) #f (lambda (x) (/ x 1)))
+    \times 1/1 { g'4 }
+    \override TupletNumber #'text = #(markup #:note "4." UP)
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel (crude-bloat-x (crude-bloat-y '((64 0 55 5 60 10 )(20 55 20 67 30 )(63 50 55 33 60 )(45 35 -52 58 -46 )(56 51 -68 58 -43 ) 100) 19) 1) '(5 . 0.893943323886) '(4 . 0.248349350417) #t (lambda (x) (/ x 497)))
+    \times 1/1 { b,4*3/2 }
+    r4
+    \saNormal \times 2/3 { r8 ees'''4^\espressivo }
+
+
+
+
+  %s4*6
+  s8
+  \sustainG
+  \once \override Glissando.color = #red
   \cricket
-  \tri c,,4^\fartFRENCH r4 r2 |
-  R1 |
-  R1 |
-  R1 |
-  s4*6
+   c,,1*5/4^\fff^\fanFRENCH \glissando \hideNotes c8 \unHideNotes
+\Black
   \monologue \FatText \MonoShift \override TextScript #'whiteout = ##t
   s4^"You" \bar "" s4^"give" \bar "" s4^"me" \bar "" s4^"star," \bar "" s4^"I" \bar "" s4^"give" \bar "" s4^"you" \bar "" s4^"five" \bar "" s4^"dollar." \once \override TextScript #'transparent = ##t s16^"."
   \unFatText \unMonoShift \revert TextScript #'whiteout
@@ -984,13 +1116,18 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \once \override NoteHead #'stencil =
   #(make-spermazoid '((260 0 270 1 300 40) (100 10 100 20 150) 10) '(5 . 0.3) '(4 . 0.4) #t (lambda (x) (* x x)))
   b4
-  R1 |
-  R1*5/4 |
-  R4.
+\Red
+\cricket
+  r4 \times 2/3 { r4 c,8^\mf } c c16 r \times 2/3 { r4 c8 } |
+  \times 2/3 { c c c } c16 r8 c16 c c r8 r4 r16 c16 c c |
+%%% WWWW
+  \saNormal
+  bes8^\f bes g
+\Black
   \feelingLucky
   \once \override NoteHead #'stencil =
   #(make-spermazoid-rel '((43 35 65 42 49 64 )(41 63 41 31 61 )(40 57 60 48 35 )39) '(5 . 0.930597296452) '(4 . 0.272550809213) #f (lambda (x) (/ x 412)))
-  b4*1/2^\p^\<
+  b'4*1/2^\p^\<
   \once \override NoteHead #'stencil =
   #(make-spermazoid-rel '((54 45 56 44 34 33 )(70 33 51 62 52 )(35 42 58 38 55 )46) '(5 . 0.0192917824205) '(4 . 0.556577940574) #t (lambda (x) (/ x 274)))
   b4*1/2
@@ -1067,14 +1204,14 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \times 4/5 { c c c c c }
   \times 4/5 { c c c c r } r4^\fermata |
   \saNormal
-  R1 |
-  r2. deh''4^\p ~ |
-  deh \acciaccatura { eeh16 } deh4 \glissando s2 |
+  %R1 |
+  deh''1^\p ~ |
+  deh4 \acciaccatura { eeh16 } deh4 \glissando s2 |
   s1 |
-  s4 c8 r8 r2 |
-  R1 |
+  s4 %{c8 r8 r2%} c2. |
+  %R1 |
   \once \override Hairpin #'padding = #5
-  ees,4^\mp^\<^\overtoneFRENCH \glissando s2. |
+  r8 ees,8^\mp^\<^\overtoneFRENCH \glissando s2. |
   s4 c'^\mf^\>\glissando s4 a8^\p \glissando \times 2/3 { c16 r16 }
   \feelingLucky
   \once \override TupletNumber #'text = #(markup #:note "2" UP)
@@ -1095,8 +1232,8 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
     \revert TupletNumber #'text
     \revert TupletNumber #'Y-offset
   \saNormal
-  \times 2/3 { r16 } r4.. bes'16^\espressivo |
-  r8.
+  \times 2/3 { r16 } \cricket \Red \tri c,4..^\ff \Black \saNormal bes''16^\espressivo |
+  r16 \Red bes16^\espressivo \Black r16
       des16 s4 s4 s4 |
   s1 |
   des8-. r8 r4 \cricket \times 2/3 { r16 c,, c8 c } \times 2/3 { c c r } |
@@ -1119,7 +1256,7 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   \feelingLucky
   r8
   \stemDown
-  \override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2.." UP) (markup #:note "2." UP))))
+  %{\override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2.." UP) (markup #:note "2." UP))))%BTT%}
   \times 1/1 { 
     \once \override NoteHead #'stencil =
     #(make-spermazoid '((100 100 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) 100) '(5 . 0.2) '(3 . 0.4) #f (lambda (x) (/ x 4)))
@@ -1169,8 +1306,8 @@ alto = \relative c'' { #(set-accidental-style 'neo-modern)
   gis, ) r8. r4 r2 |
   r2 \cricket c,16 c8 c16 r4 |
   r4 r16 c c8 c16 r8. r8 c16 c |
-  r8. c16 c \tri c8.^\f ~ \tri c8 c16^\mf c r4 |
-  r2.
+  r8. c16 c \tri c8.^\f ~ \tri c8 c16^\mf c \Red \tri c4^\f ~ |
+  c2 ~ c8 \Black r
   \footnote \markup { "" } #'(0 . 0) \appoxFRENCH NoteHead
   \feelingLucky \clef treble \override NoteHead #'style = #'default
       %\once \override NoteHead #'stencil =
@@ -1348,11 +1485,11 @@ altoGlissando = \relative c'' {
   s1 |
   s1 |
   s1 |
-  s1 |
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s1 |
   s2 c4 c |
   c c c c |
   c s2. |
-  s1 |
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%s1 |
   s4 f, g a |
   b s b s |
   s1 |
@@ -1387,30 +1524,96 @@ altoWords = \lyricmode {
   gan shi nan bao sine ho see
   nein
   how now brown cow
+  \RedL
+  star
+  \BlackL
   \repeat unfold 3 gna
   gao
-  yes
+  \RedL
+  \markup \center-column { 兒 ér } \markup \center-column { 童 tóng } \markup \center-column { 相 xiāng } \markup \center-column { 見 jiàn } \markup \center-column { 不 bù } \markup \center-column { 相 xiāng } yes
+  \markup \center-column { 笑 xiào } \markup \center-column { 問 wèn } \markup \center-column { 客 kè } \markup \center-column { 從 cōng } \markup \center-column { 何 hé } \markup \center-column { 處 chŭ } \markup \center-column { 來。 lái. }
+  \BlackL
   heu
-  hai 
+  hai
+  \RedL
+  ouais
+  \BlackL 
   %%% THOUGHTS I
   \markup \center-column { 矯 jiăo } \markup \center-column { 矯 jiăo } \markup \center-column { 珍 zhēn } \markup \center-column { 木 mù, } \markup \center-column { 巔， diān. } \markup \center-column { 得 dé } \markup \center-column { 無 wú } \markup \center-column { 金 jīn } \markup \center-column { 丸 wan } \markup \center-column { 懼？ jù? }
   \markup \center-column { 美 mĕi } \markup \center-column { 服 fú } \markup \center-column { 患 huàn } \markup \center-column { 人 rén } \markup \center-column { 指， zhĭ, } \markup \center-column { 高 gāo } \markup \center-column { 明 míng } \markup \center-column { 逼 bī } \markup \center-column { 神 shén } \markup \center-column { 惡。 ĕ. }
-  %hoi
-  no hoi ɬ
-  %\repeat unfold 6 { wa -- ter }
+  \RedL
+  aoi
+  diou
+  i
+  ou
+  tchoi
+  siou
+  niou
+  tchit
+  i
+  hai
+  soi
+  \markup \center-column { 我 wŏ } \markup \center-column { 歌 gē } \markup \center-column { 月 yuè } \markup \center-column { 徘 pái } \markup \center-column { 徊， huí } \markup \center-column { 我 wŏ } \markup \center-column { 舞 wŭ } \markup \center-column { 影 yĭng } \markup \center-column { 零 míng } \markup \center-column { 亂； luàn }
+  \repeat unfold 4 ha
+  ih hoi hoi \BlackL no hoi \RedL tchit
+  en tzou tchi
+  wa -- ter wa -- ter wa -- ter wa
+  \BlackL
   mais at -- tends, c'est trop "bien !"
   dik hoi
-  t t
+\RedL
+shh
+  i
+  \markup \center-column { 人 rén } \markup \center-column { 歸 guī } \markup \center-column { 山 shān } \markup \center-column { 郭 guō } \markup \center-column { 暗， àn } \markup \center-column { 雁 yàn } \markup \center-column { 下 xià } \markup \center-column { 蘆 lú } \markup \center-column { 洲 zhōu } \markup \center-column { 白。 bái. }
+  χ ç ni p t di rou ih iht di ou ɬ ɬ
+  t oui q t tiou doum doum t͡ʃç
+  wuh tchiou
+  t d m d m
+  dih diou ɢe
+  t \skip 1 bim
+  t dim t
+  roui
+  mim mum m m
+  s t
+  ç
+\BlackL
+
   %%% ON CLIMBING ORCHID MOUNTAIN IN THE AUTUMN TO ZHANG
   \skip 1
   i
   \markup \center-column { 天 tiān } \markup \center-column { 邊 biān } \markup \center-column { 樹 shù } \markup \center-column { 若 ruò } \markup \center-column { 薺， jì } \markup \center-column { 江 jiāng } \markup \center-column { 畔 pàn } \markup \center-column { 洲 zhōu } \markup \center-column { 如 rú } \markup \center-column { 月。 yuè }
-  %\markup \center-column { 何 hé } \markup \center-column { 當 dāng } \markup \center-column { 載 zăi } \markup \center-column { 酒 jiŭ } \markup \center-column { 來， lái } \markup \center-column { 共 gòng } \markup \center-column { 醉 zuì } \markup \center-column { 重 chóng } \markup \center-column { 陽 yáng } \markup \center-column { 節。 jié }
+
+\RedL
+chi hai
+\BlackL
+
   o -- ra -- cle
-  À ma très chère Chou -- chou a -- vec les ten -- dres ex -- cuses de son père pour ce qui
-  pfff
+
+\RedL
+  sss
+\BlackL
+\skip 1
+  À ma très chère Chou -- chou a -- vec les ten -- dres ex -- cuses de son père pour ce qui va
+
+\RedL
+  go sai i
+  fff
+  hoai dji bai ia drai houa
+  zhrai di Ryan i
+  shhh \skip 1
+\BlackL
+
+  %pfff
   you
   gung sai nan bou ki
+
+\RedL
+  ar -- rê -- te
+  no mais ar -- rê -- te
+  \repeat unfold 2 { ar -- rê -- te }
+o -- ra -- cle
+\BlackL
+
   gung tzing ha tung tchi a ou zih vun da um de ha
   hoi
   take my star oh
@@ -1425,7 +1628,13 @@ altoWords = \lyricmode {
   \markup \center-column { 美 mĕi } \markup \center-column { 元 yuán } \skip 1
   \markup \center-column { 甲 jiă} \markup \center-column { 骨 gŭ } \markup \center-column { 文 wén } \skip 1
   gung chao yao tzi
+\RedL
+  shhhhh
+\BlackL
   you
+\RedL
+you
+\BlackL
   \markup \center-column { 笑 xiào } \skip 1
   Oh o -- ra -- cle I'm
   hoi tzi ai
@@ -1458,6 +1667,9 @@ altoWords = \lyricmode {
   \repeat unfold 2 { wa -- ter }
   shh
   wa -- ter
+\RedL
+  chi
+\BlackL
   in vai nou chin haou ni ba Schloß o i sai hao si ni lu -- cky lu -- cky lu -- cky wok oum tzi bou si tch
 }
 
@@ -1630,7 +1842,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
   \times 2/3 { c8 c4 }
   \times 2/3 { c8 c4 }
   r2. r4^\fermata |
-  R1 R1 R1 R1 R1 |
+  %{R1%} R1 R1 R1 R1 |
   r2. r8.. \tri c32^\f |
   r16 \tri c r \times 2/3 { c c \tNormal g' ~ } g \bendAfter #-2 a32 fis d e
   \times 2/3 { b'16 fis b, } \feelingLucky \clef bass 
@@ -1695,7 +1907,7 @@ tenor = \relative c' { #(set-accidental-style 'neo-modern)
      \once \override NoteHead #'stencil = #(make-spermazoid (crude-bloat-y '((100 0 70 200 70 130) (100 150 70 80 20) 100) 6) '(5 . 0.2) '(3 . 0.4) #t (lambda (x) 0))
       b4^\markup \fontsize #-2 \parenthesize \note #"4" #UP \cricket \tri c16 \tri c
   \feelingLucky \clef treble
-  \override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2" UP) (markup #:note "1" UP) (markup #:note "1" UP "+" #:note "1" UP))))
+  %{\override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2" UP) (markup #:note "1" UP) (markup #:note "1" UP "+" #:note "1" UP)))) %BTT%}
   \times 1/1 {
     \override NoteHead #'stencil =
        #(make-spermazoid-rel (crude-bloat-x '((47 51 47 54 49 56 )(48 39 57 40 57 )(61 42 59 47 59 )(44 50 59 53 60 )(40 55 81 58 103 )46) 0.6) '(5 . 0.804195711567) '(4 . 0.147055913031) #f (lambda (x) (/ x 1)))
@@ -1844,7 +2056,7 @@ tenorGlissando = \relative c' {
   s1 |
   s1 |
   s1 |
-  s1 |
+%  s1 |
   s1 |
   s1 |
   s1 |
@@ -1942,9 +2154,12 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   $(skip-of-length tperc)
   c16^\f c r8 c16 c r8 c16 c r8 c16 c r8 |
   c16 c r8 c16 c r8 c16 c r8 c16 c r8 |
-  R1 |
-  R4. |
-  r4 |
+\Red
+  r2.... \tri c32^\f |
+  \bNormal
+  c8^-^\mf c^- c^- |
+\Black
+  R4 |
   \feelingLucky
   \override Stem #'direction = #DOWN
   \revert Staff . BarLine #'bar-extent
@@ -1968,16 +2183,18 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   s2 \noLed e4^\pp )
   r4 r2 |
   \revert NoteHead #'no-ledgers
-  c2^\mf r2 |
-  R1. |
+  c2^\mf \Red \stemNeutral e,, ~ |
+  e1. | \Black
   \cricket
   \sustainG
-  \tri c1*11/16^\f^\puffFRENCH \glissando \hideNotes c8 \unHideNotes
+  \tri c''1*11/16^\f^\puffFRENCH \glissando \hideNotes c8 \unHideNotes
   \tri c1*1/4 \glissando \hideNotes c8 \unHideNotes
   c4*1/2^\veryNasalFRENCH c4*1/2 c4*1/2 c4*1/2
   R1*7/8
-  R1*5/4
-  R2
+\Red
+  \cricket r4 \tri c1:16^\mf^\lipSmackingFRENCH |
+  \times 2/3 { r8 c^\f^\laughterFRENCH c } \times 2/3 { c c r } |
+\Black
   % HERE
   \saNormal
   \normalG
@@ -2028,21 +2245,44 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     #(make-spermazoid '((100 100 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) (40 30 240 10 340) 1) '(5 . 0.2) '(4 . 0.4) #t (lambda (x) x))
     b4 } \stemNeutral
     \saNormal r8 dis'8 |
-  R1 |
-  R2 |
-  R2 |
-  r4. \clef bass d,,,8^\mf ~ |
+\Red
+\cricket
+   \tri c,,1^\dentistFRENCH ~ |
+   \tri c2 ~ \times 2/3 { \tri c4 \saNormal d'8^\mf ( ~ } d4 \glissando |
+   c4 ) 
+\Black
+\bNormal
+  r8 d,,8^\mf ~ |
   d2 ~ |
   d1 ~ |
   d2. r4 |
-  R1 |
+\override TextScript color = #red
+  r8 \monologue \FatText \MonoShift
+  \override TextScript #'whiteout = ##t
+  s8.^"here's" s8.^"a" s4^"fucking" s4^"star"
+  \unFatText \unMonoShift
+  \revert TextScript #'whiteout
+\revert TextScript color
+\bNormal
   g8^\mf g e |
-  $(skip-of-length powerText)
-  $(skip-of-length nineStarsText)
-  s4
+\override TextScript #'color = #red
+\Red
+  \monologue \FatText \MonoShift
+  \override TextScript #'whiteout = ##t
+  s4^"I" \bar "" s4^"have" \bar "" s4^"five" \bar "" s4^"stars," \bar "" s4^"you" \bar "" s4^"give" \bar "" s4^"me" \bar "" s4^"power" \bar "" 
+  \unFatText \unMonoShift
+  \revert TextScript #'whiteout
+  %$(skip-of-length nineStarsText)
+  \cricket
+\once \override Glissando #'color = #red
+\sustainG
+  c'1*11/8 \glissando \hideNotes c8 \unHideNotes
+  \saNormal bes'4^\espressivo^\mf
+\revert TextScript #'color
+\Black
   \goalposts \clef percussion  
   \override NoteHead #'style = #'triangle
-  \times 2/3 { b'4^\f^\moreSpitFRENCH d8 }
+  \times 2/3 { b,4^\f^\moreSpitFRENCH d8 }
     r4
     \footnote "*" #'(0.5 . 0.5) \kFRENCH NoteHead
     \once \override Glissando .bound-details.right.padding = #0
@@ -2056,8 +2296,9 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     \times 2/3 { b4^\sfz d8 }
   \times 2/3 { c16 g8 c16 a8 }
     c4-\staccatissimo | 
-  c4-\staccatissimo^\sfz r4 r2 |
-  R1 |
+  c4-\staccatissimo^\sfz \Red \cricket r2 r16 \tri c8. ~ |
+  \tri c4 c8\bendAfter #-2  r8 r2 |
+\Black
   r2 \times 2/3 { r4 \cricket \tri c8^\airFRENCH }
     \feelingLucky \clef bass
     \override TupletNumber #'text = #(markup #:note "4" UP "+" #:note "2" UP)
@@ -2080,26 +2321,62 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
    \override NoteHead #'style = #'harmonic-mixed
    \times 2/3 { e8 c4 ~ } c8 r \times 2/3 { e8 c4 }
    e8 r16 \saNormal \times 9/15 { e''16 g e d e d d8 b16 d b a \cricket c,16.^\girlLaughFRENCH c }
-   c16 c c c
+   c16 c %c c
    \sustainG
-   c1*29/8^\fff^\fanFRENCH \glissando \hideNotes c8. \unHideNotes
+
+\Red
+\override TextScript #'color = #red
+  \monologue
+  \FatText \MonoShift
+  \override TextScript #'whiteout = ##t
+  s8^"Oh" |
+  s4^"oracle," \bar "" s4^"I'm" \bar "" s4^"pregnant" \bar "" s4^"with" \bar "" s4^"your" \bar "" s4^"star."
+  \unFatText \unMonoShift \revert TextScript #'whiteout
+  %s4*9 s16
+\Black
+\revert TextScript #'color
+\cricket
+   \sustainG
+\unHideNotes
+   c1*9/4^\fff^\fanFRENCH \glissando \hideNotes c16 \unHideNotes
+
+
   \bNormal
   r4 bes8^\espressivo^\mf r8 |
-  s4*5
   \cricket \override NoteHead #'style = #'triangle
-  r8. c16^\mp^\waterGunFRENCH r4 r8 \times 2/3 { c16 c c } c8 r8 |
+
+  s1 s8 \Red \cricket \override NoteHead #'style = #'triangle c8^\mp^\waterGunFRENCH 
+\Black
+  r8. c16 r4 r8 \times 2/3 { c16 c c } c8 r8 |
   r8. c16 c r8. r4 c4 ~ c16 r8 c16 |
   \bNormal
   bes,8^\f bes g |
+
   R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4 |
-  R1 |
-  R2 |
+\tNormal
+
+\Red
+
+  fis''16^\mp^\asiaFRENCH dis8 fis8. \bendAfter #-2 |
+  e8. fis8 b,16 ~ |
+  b cis8 \feelingLucky
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel '((63 54 62 35 63 45 )(55 63 63 48 69 )(32 70 68 37 65 ) 100) '(5 . 0.326146273239) '(4 . 0.563352469366) #t (lambda (x) 0))
+  d4*3/4
+  r16
+    \once \override NoteHead #'stencil =
+    #(make-spermazoid-rel '((34 62 44 63 57 46 )(70 67 54 49 67 )(41 53 69 46 41 )37) '(5 . 0.375801042849) '(4 . 0.891003307627) #t values)
+  e4*1/2 r16 |
+  \tNormal
+  r2 a,4^\sf^\< \glissando \grace { \stemTrans <\parenthesize bes,>\ff } \unStemTrans r4 |
+  \cricket \times 2/3 { c'8^\mp^\tenderFRENCH c c } r4 |
+
+\Black
+
+
+\bNormal
   \normalG
-  c'8^\mf^\spiritualFRENCH bes aes r r16 ees'4. r16 |
+  c8^\mf^\spiritualFRENCH bes aes r r16 ees'4. r16 |
   r4 r8. \feelingLucky
     \once \override NoteHead #'stencil =
     #(make-spermazoid-rel '((58 55 50 47 66 57 )(70 66 33 34 37 )(60 58 42 40 54 )50) '(5 . 0.469883905017) '(4 . 0.0352222761969) #t (lambda (x) (/ x 1)))
@@ -2140,7 +2417,7 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   c16 c8 c16
   \times 4/5 { c c c c c }
   \times 4/5 { c c c c r } r4^\fermata |
-  R1 R1 R1 R1 R1
+  %{R1%} R1 R1 R1 %{R1%}
   \tNormal
   r2. \times 2/3 { r4 aes'8^\f } |
   \saNormal e''16. ( \glissando fis,,32 ) \cricket \tri c32 \tri c \tri c \tri c
@@ -2177,12 +2454,17 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
   \clef bass
   \times 2/3 { r8 c,^\authorityFRENCH a } \times 4/5 { r8 a16 d8 } \times 4/5 { c \cricket c'16^\mf c16 r } \bNormal r8. bes,16 \glissando ( |
   s8. %{GLISS%} aes16 ) r4 \times 2/3 { r8 ges^\espressivo ges^\espressivo } r4 |
-  r2.. \cricket c'8 ~ |
+
+\Red  
+  \cricket r4.. \once \override TupletNumber #'text = #tuplet-number::calc-fraction-text \times 7/10 { c'8 c8 c8 c8 c8 }
+\Black
+c8 ~ |
+
   c8 c8 \times 2/3 { c4 c8 ~ } c c4. ~ |
   c8
   \feelingLucky \clef bass
   \stemDown
-  \override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2.." UP) (markup #:note "2." UP))))
+  %{\override TupletNumber #'text = #(lambda (grob) (broken-tuplet-text grob (list (markup #:note "2.." UP) (markup #:note "2." UP)))) %BTT%}
   \times 1/1 { 
     \once \override NoteHead #'stencil =
     #(make-spermazoid '((100 100 150 30 70 50) (100 40 100 80 180) (30 10 210 10 215) 100) '(5 . 0.2) '(3 . 0.4) #f (lambda (x) (/ x 4)))
@@ -2255,11 +2537,18 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     f,4*3/2^\markup \fontsize #-2 \parenthesize \note #"4." #UP
   \once \override NoteHead #'stencil = #(make-spermazoid-rel '((46 54 48 54 52 58 )(56 42 59 44 59 )(38 44 60 49 62 )(37 51 63 54 65 )(54 55 67 56 68 )50) '(5 . 0.170817307394) '(4 . 0.498845991841) #t (lambda (x) (/ x 1)))
     b4*2^\mf^\markup \fontsize #-2 \parenthesize \note #"2" #UP
-  R1 |
+  %R1 |
   %{r4 \bNormal ais,^\mp ( \glissando |
   fis4. \glissando a8 ) %}
-  r2
-  \cricket c,8^\p c16 c c \feelingLucky
+  %r2
+
+\Red
+  r8 \cricket \tri c,8^\mp r16 \tri c8 r16 \tri c8 r16 \tri c8 r16 \tri c8 |
+  r16 \tri c8 r16 \tri c8 r8
+\Black
+
+
+  \cricket c8^\p c16 c c \feelingLucky
   \clef treble
   \once \override NoteHead #'stencil = #(make-spermazoid-rel '((34 68 39 73 41 77 )(65 35 79 40 79 )(48 45 79 49 80 )(42 53 81 53 82 )(32 55 84 57 85 )39) '(5 . 0.412346933934) '(4 . 0.64957028879) #f (lambda (x) (/ x 1)))
     g'4*3/4^\mf^\markup \fontsize #-2 \parenthesize \note #"8." #UP  
@@ -2275,8 +2564,15 @@ bass = \relative c' { #(set-accidental-style 'neo-modern)
     \once \override NoteHead #'stencil = #(make-spermazoid-rel '((53 66 55 66 55 69 )(46 50 71 50 71 )(53 54 73 57 74 )(69 59 75 62 75 )(52 63 76 67 76 )35) '(5 . 0.0404376541608) '(4 . 0.067220116209) #t (lambda (x) (/ x 1)))
     f4^\mf
     d4*1/2-\staccatissimo
-  } \bNormal c,16^\pp \cricket \tri c'8.^\mf ~ \tri c4 r4 |
-  R1*5 |
+  } \bNormal c,16^\pp \cricket \tri c'8.^\mf ~ \tri c4 \saNormal \Red \times 4/5 { g''8. c8-\staccatissimo } |
+  \times 4/5 { b16 a8-\staccatissimo e8-\staccatissimo } r8. \cricket \tri c,16^\p ~ \tri c \tri c8 r16 
+
+r16 \tri c8.^\mp^\waveFRENCH ~ |
+  \tri c8. r16 \tri c4 %{ < %} r8 \tri c4. %{kshh < >%} ~ |
+  \tri c16 \tri c r \tri c \tri c \tri c \tri c r r \tri c r8 \tri c16 r8. |
+  \tri c16 r8. r4 r2 |
+  R1 |
+\Black
 }
 
 bassGlissando = \relative c' {
@@ -2356,14 +2652,25 @@ bassGlissando = \relative c' {
 
 bassWords = \lyricmode {
   \repeat unfold 8 { dol -- lar }
+\RedL
+tcht
+gna gna gna
+\BlackL
   chin χoui
   heu
   hai 
   nai
+\RedL
+nai
+\BlackL
   ħ \skip 1
   ħ \skip 1
   \repeat unfold 4 gnig
   %no hoi
+\RedL
+\skip 1
+ha ha ha ha
+\BlackL
   hoi
   dra -- gon
   \repeat unfold 6 { wa -- ter }
@@ -2375,25 +2682,48 @@ bassWords = \lyricmode {
   dik χout tik oui nout r p t hai
   di ou m m diouzhk tchi dim dum doum
   tchit din ou dzin tzit
+\RedL
+\skip 1 gau
+\BlackL
   ɢe
   o -- ra -- cle
+\RedL
+  shhh
+  \skip 1
+  love
+\BlackL
   t͡ʃ k kioui \repeat unfold 2 \skip 1 ki
   kih
   tzi \markup \rotate #180 "h" ki
   ki ɢ ki \markup \rotate #180 "h" ǂ çi
+\RedL
+s -- uivre
+\BlackL
   tchik
   kkhhhwhy
   why ga ga
   ma -- ha ma -- ha ga
   % ON THE FESTIVAL OF THE MOON TO SUB-OFFICIAL ZHANG
   \markup \center-column { 下 xià } \markup \center-column { 床 chuáng } \markup \center-column { 畏 wèi } \markup \center-column { 蛇 shé } \markup \center-column { 食 shí } \markup \center-column { 畏 wèi } \markup \center-column { 藥， yào } \markup \center-column { 海 hăi } \markup \center-column { 氣 qì } \markup \center-column { 濕 shī } \markup \center-column { 蟄 zhé }
-  ha ha ha ha ha ha
+  ha ha ha ha %ha ha
   shhh \skip 1
   you
+\RedL
+pst
+\BlackL
   \repeat unfold 7 pst
   pshhh
   pst
   o -- ra -- cle
+
+\RedL
+  no no zi
+  a i ou a
+  niao ni
+  niao
+  here's my star
+\BlackL
+
   take my star oh
   ouais t p t
   bi ni mi hya dum
@@ -2414,6 +2744,9 @@ bassWords = \lyricmode {
   wa -- ter
   or
   o -- ri
+\RedL
+Oh o -- ra -- cle, I'm
+\BlackL
   STOP THE FUCK -- ING STAR
   i zao hi o si ao gun
   star
@@ -2428,29 +2761,41 @@ bassWords = \lyricmode {
   \markup \center-column { 孤 gū } \markup \center-column { 鴻 hóng } \markup \center-column { 海 hăi } \markup \center-column { 上 shàng } \markup \center-column { 來， lái }
   \markup \center-column { 池 chí } \markup \center-column { 潢 huáng } \markup \center-column { 不 bù } \markup \center-column { 敢 găn } \markup \center-column { 顧； gù }
   hoi tzi ai %nuo
+  \RedL
+  \repeat unfold 7 tz
+  \BlackL
   no o -- ra -- cle gan chi ha m
   star here -- ou star star here star
   dar -- ling i da Schloß shh
+
+\RedL
+\markup \center-column { 勿 wù } \markup \center-column { 謂 wèi }\markup \center-column { 知 zhī } \markup \center-column { 音 yīn } \markup \center-column { 稀？ xĭ }
+  \repeat unfold 2 pss
+    shh shh kshh
+  ki k t kih tu \repeat unfold 3 kou
+\BlackL
 }
 
 \score {
   \new ChoirStaff <<
+%{
     \new Staff \with { instrumentName = \sopNAME shortInstrumentName = \sopSNAME
 } <<
       << \new Voice = "soprano" { \numericTimeSignature << \soprano \marks >> } \\ { \sopranoGlissando } >>
       \lyricsto "soprano" \new Lyrics { \sopranoWords }
     >>
+%}
     \new Staff \with {
        instrumentName = \altNAME shortInstrumentName = \altSNAME
 } <<
-      << \new Voice = "alto" { \numericTimeSignature \alto } \\ { \altoGlissando } >>
+      << \new Voice = "alto" { \numericTimeSignature << \alto \marks >> } \\ { \altoGlissando } >>
       \lyricsto "alto" \new Lyrics { \altoWords }
-    >>
+    >> %{
     \new Staff = "tenorstaff" \with { instrumentName = \tenNAME shortInstrumentName = \tenSNAME
 } <<
       << \new Voice = "tenor" { \numericTimeSignature \tenor } \\ { \tenorGlissando } >>
       \lyricsto "tenor" \new Lyrics { \tenorWords }
-    >>
+    >> %}
     \new Staff \with { instrumentName = \basNAME shortInstrumentName = \basSNAME
 } <<
       << \new Voice = "bass" { \numericTimeSignature \bass } \\ { \bassGlissando } >>
@@ -2460,6 +2805,7 @@ bassWords = \lyricmode {
   \layout {
     \context {
       \Voice
+      \override NoteHead #'layer = #5
       \override TextScript #'layer = #6
       \override Glissando #'breakable = ##t
       \override TupletNumber #'breakable = ##t

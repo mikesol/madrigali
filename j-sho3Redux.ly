@@ -14,10 +14,17 @@ unTransH = \revert NoteHead #'transparent
 }
 #(ly:set-option 'point-and-click #f)
 
-sim = \markup \italic { sim. }
+myPageBreak = \pageBreak
 
+sim = \markup \italic { sim. }
+redT = \once \override TextScript #'color = #red
 midiStuff = { s4. s4. s4. s4 s16 }
 normalStuff = { \partial 16 }
+
+Red = \override NoteHead #'color = #red
+Black = \revert NoteHead #'color
+RedL = \override LyricText #'color = #red
+BlackL = \revert LyricText #'color
 
 percussionFRENCH = \markup \italic \column { "en rajoutant des petits coups" "de glockenspiel et de cymbale" }
 highfryFRENCH = \markup \italic "fry aigu"
@@ -96,7 +103,7 @@ spoonsENGLISH = \markup { \italic "if possible, accompany yourself playing the s
 mouthclickFRENCH = \markup { \italic "claquement de langue" }
 mouthclickENGLISH = \markup { \italic "tongue click" }
 slowglissFRENCH = \markup { \italic \column { "glissando lent" } }
-slowglissFRENCH = \markup { \italic \column { "slow glissando" } }
+slowglissENGLISH = \markup { \italic \column { "slow glissando" } }
 lambFRENCH = \markup { \italic "une voiture qui passe ou un agneau qui bêle" }
 lambENGLISH = \markup { \italic "like a passing car or bleeting lamb" }
 
@@ -124,7 +131,8 @@ tup = {
   \revert TupletNumber #'stencil
 }
 
-#(set-global-staff-size 17.82)
+%#(set-global-staff-size 17.82)
+#(set-global-staff-size 15.87)
 
 
 \paper {
@@ -138,6 +146,8 @@ tup = {
   top-margin = 0.5\in
   bottom-margin = 0.6\in
   ragged-last-bottom = ##f
+  max-systems-per-page = #4
+  %min-systems-per-page = #4
 }
 
 %% DEFS
@@ -658,10 +668,16 @@ soprano = \relative c' {
   \time 2/4
   c32^\f c8.. ~ c4
   \time 3/4
-  R2. |
+  \stemNeutral
+  \berioGoalposts
+  \Red
+  a4.^\mp^\< b8 d e |
   \time 2/8
+  \stemUp
+  c8^\>
   \saNormal
-  r8 fis''8^\p^\espressivo |
+  \Black
+  fis''8^\p^\espressivo |
   \time 3/16
   \cricket
   c,,8^\f c16 |
@@ -688,29 +704,37 @@ soprano = \relative c' {
   \time 6/16
   \cricket
   c,4.^\mp ~ c4. ~ c4.  |
-  \time 3/4
-  R2. |
+  \berioGoalposts
+  \Red
+  a4.^\< b8 d e |
   \time 3/8
-  \saNormal
-  r8 fis''4^\p^\espressivo |
+  \stemUp
+  c4^\> \saNormal fis''8^\p^\espressivo | %\cross c8:32\!^\markup { \italic \column { "aspiration rapide, pensez à" "Hanibal Lector, Le silence des agneaux" } } |
   \time 3/4
-  r2 r8 fis8^\espressivo ~ |
-  \time 3/8
-  \saNormal
-  fis8 r4 |
-  \time 3/4
-  r4. fis4^\espressivo r8 |
-  \time 3/8
-  \saNormal
-  R4. |
-  \time 4/4
   \stemNeutral
-  R1 | R1 | R1 |
+  \cricket
+  \berioGoalposts
+  a,,,4.^\< b8 d e |
+  \time 3/8
+  \stemUp
+  \saNormal fis''4^\subPd^\espressivo \berioGoalposts \cricket \cross c,,8:32^\markup { \italic \column { "aspiration" "rapide" } } |
   \time 3/4
-  R2. |
+  \stemNeutral
+  a4.^\< \saNormal fis'''8^\subPd^\espressivo \berioGoalposts \cricket d,,^\< e16 c^\f ~ |
+  \time 3/8
+  \stemUp
+  c4. |
+  \time 4/4
+  \cricket
+  c1 ~ |
+  c16 c8 c16 ~ c8 c16 c16 ~ c2 ~ |
+  c1 ~ |
+  \time 3/4
+  c2. |
+  \Black
   \saNormal
   \time 4/4
-  r4 fis,,4^\mp r8 fis r4 |
+  r4 fis4^\mp r8 fis r4 |
   r4 fis4 r8 fis a g |
   r4 fis4 r8 fis r4 |
   r4 fis4 r8 fis a g |
@@ -738,11 +762,14 @@ soprano = \relative c' {
   c'2.. ~ \times 2/3 { c8 r16 }
   \time 6/16
   R4. |
-  \time 3/4
-  R2. |
+  \berioGoalposts
+  \Red
+  \cricket
+  a,4.^\< b8 d e |
   \time 3/8
-  \saNormal
-  r8 fis'4^\p^\espressivo |
+  \stemUp
+  c4^\> \saNormal fis''8^\p^\espressivo | %\cross c8:32\!^\markup { \italic \column { "aspiration rapide, pensez à" "Hanibal Lector, Le silence des agneaux" } } |
+  \Black
   \time 3/4
   R2. |
   \time 2/4
@@ -752,7 +779,7 @@ soprano = \relative c' {
   \time 3/4
   R2. |
   \time 5/8
-  \times 2/3 { c16 c c } \times 2/3 { c c c } \times 2/3 { c c c } \times 2/3 { c c c } \times 2/3 { c c c } |
+  \times 2/3 { c16 c c } \times 2/3 { c c c } \times 2/3 { c c c } \times 2/3 { c c c } \times 2/3 { c c c } | \myPageBreak
   \time 5/4
   R1*5/4 |
   \time 5/8
@@ -778,9 +805,13 @@ soprano = \relative c' {
   c8 c16 |
   c8. |
   \time 3/4
-  R2. |
-  \time 3/8
-  r8. c16 c c |
+  \stemNeutral
+  \berioGoalposts
+  \Red
+  a4.^\mp^\< b8 d e |
+  \time 2/8
+  \stemUp
+  c8.^\> \Black c16^\subFdynamic c c |
   \time 3/4
   \slash c2.^\markup { \italic \column { "en frottant" "les mains" }} |
 %{
@@ -801,7 +832,6 @@ soprano = \relative c' {
   \cadenzaOff
   \time 3/8
   \saNormal
-  
   c'4 ~ c16 r16 |
   \time 5/16
   \cricket |
@@ -813,6 +843,7 @@ soprano = \relative c' {
   \cricket \clef percussion
   \berioGoalposts
   \ottava #1
+  \Red
   r8. c16^\mf^\chipmunkFRENCH r4 \cross c,16_\clickFRENCH a'-. r8 r16 e'8.-\bendAfter #-2  |
   r8 d8-. r8 c16 c r8 \times 2/3 { r16 b16 b } r16 a16 r8 |
   r8 c r4 r16 a16^\responseFRENCH (  f'4-\bendAfter #-3 ) r8 |
@@ -828,24 +859,39 @@ soprano = \relative c' {
   r8 e16 c r4 b8 |
   \ottava #0
   \time 4/4
+  \Black
   \saNormal \clef "treble"
   g'4^_^\ff g4^_ g4^_ g4^_ |
   g4^_ g4^_ g4^_ g4^_ |
   \time 2/4
-  g4^_ g8 r |
+  g4^_ g8 \cricket \berioGoalposts \clef percussion \berioGoalposts \Red b,,^\f |
   \time 4/4
-  R1 |
-  r2 \times 2/3 { r4 fis'2^\p^\espressivo }
+  d c e d r8 f ~ f8. \cricket \times 2/3 { c32 c c } |
+  \stemNeutral
+  a4. b8 d e \stemUp c
+  \saNormal
+  fis''8^\p^\espressivo | 
+  \Black
   r4 a,,^\mp r8 aes r8 g |
   r4 g r8 fis g gis |
   r4 a4 r8 aes r4 |
   \time 6/16
-  R4.*10
+  \cricket
+  \Red
+  c,4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ | 
+  \redT
+  c16^\markup \italic \column { "en regardant Elsa de travers," "genre tu fais quoi, meuf ?" } r r4 |
+  \Black
+  R4.*5 |
   \time 9/16
-  R1*9/16
+  \Red
+  r16 \times 4/5 { c8^\mf c8 c8 c8 c8 } | \Black
   \time 2/2
   \normal \clef "treble"
-  r8 c16^\mp^\< c c8 b r8 bes16 bes bes8 a |
+  r8 c'16^\mp^\< c c8 b r8 bes16 bes bes8 a |
   g f e d c4-.^\f e''4-.^\pp
   c,4.^\mp \glissando a8 ~ a4. r8 |
   c4. \glissando a8 ~ a4. r8 |
@@ -854,6 +900,7 @@ soprano = \relative c' {
   a4-. r4 r4 |
   \time 2/4
   \cricket \clef percussion c,32^\f c8.. ~ c4 |
+  \myPageBreak
   \time 3/4
   \normal \clef "treble"
   \times 2/3 { fis4^\mf^\flatterFRENCH  dis r } r |
@@ -862,8 +909,9 @@ soprano = \relative c' {
   \time 3/4
   fis2. |
   \time 6/4
-  r8^\punctuateFRENCH dis4. ~ dis2 r2 |
+  r8^\punctuateFRENCH dis4. ~ dis2 \cricket \Red \times 2/3 { r8 c c } \Black r4 |
   \time 7/4
+  \saNormal
   fis2. ~ fis2 r2 |
   \time 5/4
   dis2. ~ dis2 ~ |
@@ -877,6 +925,7 @@ soprano = \relative c' {
   R1 |
   R1 |
   R1 |
+  \myPageBreak
   R1 |
   R1 |
   \normal \clef "treble"
@@ -890,21 +939,37 @@ soprano = \relative c' {
   \time 2/4
   bes16 bes32 bes bes bes16.  ~ bes8. bes32 bes |
   \cricket \clef percussion \berioGoalposts
-  \footnote "" #'(0 . 0) \tappingagainFRENCH NoteHead
-  c,1^\mp^\slowglissFRENCH \glissando  s4 |
+  \footnote "" #'(0 . 0) %{\tappingagainFRENCH%} NoteHead
+  R1*5/4
   \time 3/4
-  s2. |
+  \stemNeutral
+  \cricket \berioGoalposts
+\Red
+  a,4.^\mp^\< b8 d e |
   \time 7/8
-  s1*7/8 |
+  \stemUp
+  c4^\> r8\! r4 r4 |
   \time 3/4
-  s2. |
+  \stemNeutral
+  a4.^\< b8 d e |
   \time 9/8
-  s1 c'8 |
+  \stemUp
+  c4^\> r8\! r4 r4 r8 a8 |
+\Black
+%  c,1^\mp^\slowglissFRENCH \glissando  s4 |
+%  \time 3/4
+%  s2. |
+%  \time 7/8
+%  s1*7/8 |
+%  \time 3/4
+%  s2. |
+%  \time 9/8
+%  s1 c'8 |
   \time 4/4
   R1 |
   R1^\fermataMarkup |
   \normal \clef "treble"
-  f,1^\ppp ~ |
+  f'1^\ppp ~ |
   \time 6/4
   f4 \air \clef percussion \ctip \stemTrans \sustainG c4*4^\>^\bravosmallFRENCH \glissando \grace { \hideNotes c8 \unHideNotes } r4\! \normalG |
   \time 4/4
@@ -913,6 +978,7 @@ soprano = \relative c' {
   \footnote "" #'(0 . 0) \waterFRENCH NoteHead 
   \berioGoalposts
   \ottava #1
+  \Red
   g''8^\mf^\cadenzaFRENCH r r4 r8 d r4 |
   f8 r8 r8 e16 e \times 2/3 { r4 d8 } r8. e16 |
   r4. f8 %{%} r4 r8. e16 |
@@ -920,6 +986,7 @@ soprano = \relative c' {
   r8 f8 r8. f16 r4 c16 c c c |
   r8 d16 c \times 2/3 { r4 e8 } r4 f8 r8 |
   r8 d \times 2/3 { r8 c f } \ottava #0 r2 |
+  \Black
   \normal \clef "treble"
   r4 a,2.^\mp |
   a1 |
@@ -948,8 +1015,8 @@ soprano = \relative c' {
   bes c ees f g bes c ges f ees |
   bes c ees f g bes c ges f ees |
   bes c ees f g bes c ges f ees |
-  bes c ees f g bes c ges f ees |
-  bes c ees f g bes c ges f ees |
+  bes c ees f g bes \Red \cricket c, c c \saNormal \Black ees |
+  bes c ees f g bes \Red \cricket c, c c \saNormal \Black ees |
   bes c ees f g bes c ges f ees |
   %bes c ees f g bes c ges f ees |
   \transpose c bes, \relative c' {
@@ -963,6 +1030,9 @@ soprano = \relative c' {
 sopranoWords = \lyricmode {
   shhh
   Al -- lez
+  \RedL
+  I'm a lit -- tle girl
+  \BlackL
   â
   Bang, you're dead.
   Bang, you're dead.
@@ -971,7 +1041,12 @@ sopranoWords = \lyricmode {
   Bang, you're dead.
   Schloß!
   shhh
-  â â â
+  \RedL
+  I'm a lit -- tle girl â
+  I'm a lit -- tle â \skip 1  
+  I'm â lit -- tle girl
+  zzzzhh gir zhh rl zzhhhh
+  \BlackL
   A -- ra -- ça
   a pra -- ia.
   Que -- ri -- do te a -- mo.
@@ -981,7 +1056,9 @@ sopranoWords = \lyricmode {
   Sil -- ly "ra -"
   Al -- lez.
   Schloß!
-  â
+  \RedL
+  I'm a lit -- tle girl â
+  \BlackL
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
@@ -991,6 +1068,9 @@ sopranoWords = \lyricmode {
   Bang, you're dead.
   Bang, you're dead.
   Bang, you're dead.
+  \RedL
+  I'm a lit -- tle girl
+  \BlackL
   part of me
   \skip 1
 %{
@@ -1004,9 +1084,15 @@ sopranoWords = \lyricmode {
   Sil -- ly "ra -"
   \repeat unfold 47 \skip 1
   No! No! No! No! No! No! No! No! No! No!
-  â
+  \RedL
+  pre -- ten -- tious right -- eous fuck! chi -- qui -- ta I'm a lit -- tle girl â
+  \BlackL
   Tem cui -- da -- do pe -- ri -- go
   E um
+  \RedL
+  shhh
+  et si on di -- sait
+  \BlackL
   Ca -- li -- for -- nia
   C A L I F O R N I A
   Save me.
@@ -1016,6 +1102,9 @@ sopranoWords = \lyricmode {
   J -- sho
   J -- sho
   J -- sho
+  \RedL
+  change it
+  \BlackL
   J -- sho
   \markup { \center-column { 言 yán }} \markup { \center-column { 者 zhě }} \markup { \center-column { 不 bù }} \markup { \center-column { 如 zhī }} \markup { \center-column { 知 zhī }} \markup { \center-column { 者 zhě }} \markup { \center-column { 默 mò }}
   \markup { \center-column { 此 cĭ }} \markup { \center-column { 語 yŭ }} \markup { \center-column { 吾 wú }} \markup { \center-column { 聞 wén }} \markup { \center-column { 于 yú }} \markup { \center-column { 老 lăo }} \markup { \center-column { 君 jūn }}
@@ -1024,7 +1113,10 @@ sopranoWords = \lyricmode {
   fac -- to -- rem cæ -- li et ter -- ræ,
   vi -- si -- bi -- li -- um om -- ni -- um et  in -- vi -- si -- bi -- li -- um.
   Et in u -- num Do -- mi -- num IE -- SUM CHRIS -- TUM, Fi -- li -- um
-  oooooo " "
+  \RedL
+  I'm a lit -- tle girl. I'm a lit -- tle girl I'm
+  \BlackL
+  %oooooo
   Schloß! " "
   \repeat unfold 26 { " " }
   Sil -- ly "ra -"
@@ -1035,7 +1127,9 @@ sopranoWords = \lyricmode {
   Bang you're dead.
   Bang you're dead.
   Bang you're dead. part of me
-  \repeat unfold 11 { Ev' -- ry -- bo -- dy wants to be part of me. }
+  \repeat unfold 4 { Ev' -- ry -- bo -- dy wants to be part of me. }
+  \repeat unfold 2 { Ev' -- ry -- bo -- dy wants to \RedL part of me \BlackL me. }
+  \repeat unfold 5 { Ev' -- ry -- bo -- dy wants to be part of me. }
 }
 
 alto = \relative c' {
@@ -1119,14 +1213,16 @@ alto = \relative c' {
     \stemNeutral
   }
   \time 4/4
-  r4^\vacuumoffFRENCH d4^\mp r8 d r4 |
-  r4 d4 r8 d fis e |
-  r4 d4 r8 d r4 |
-  r4 d4 r8 d fis e |
-  r4 c4 r8 c r4 |
-  r4 c4 r8 c c c |
+  \saNormal
+  \Red
+  g4 \cricket \cross c8^\mouthclickFRENCH \saNormal g d'4 \cricket \cross c8 \saNormal g ~ |
+  g g \cricket \cross c8 \saNormal g d' \cricket \cross c8 \saNormal d e ~ |
+  e e \cricket \cross c8 \saNormal e b4 \cricket \cross c8 \saNormal e ~ |
+  e e \cricket \cross c8 \saNormal e b \cricket \cross c8 \saNormal b c ~ |
+  c c \cricket \cross c8 \saNormal c g8 \cricket \cross c8 \saNormal c d ~ |
+  d d \cricket \cross c8 \saNormal d a d \cricket \cross c8 \saNormal g ~ |
   \time 3/8
-  r4 d16 \cricket c16^\mp |
+  g g \Black \cricket \cross c16 c16^\mp |
   \time 6/16
   \stemUp
   c c c c c c |
@@ -1136,11 +1232,13 @@ alto = \relative c' {
   c c c c c r |
   \time 2/4
   \normal \clef "treble"
-  a'8^\f a a r |
+  \Red
+  a8^\f a a r |
   a8 a a r |
   \cricket
   \clef percussion
-  c,32 c8.. ~ c4 |
+  \Black
+  c32 c8.. ~ c4 |
   \normal \clef "treble"
   \time 4/4
   e2. g8 ~ \times 2/3 { g8 \cricket \clef percussion c,16^\mp }
@@ -1168,9 +1266,10 @@ alto = \relative c' {
   \time 3/4
   \times 2/3 { c c c } r8 r2 |
   \saNormal
-  r4 d,4^\mp r8 d r4 |
-  \time 7/8
-  r4 d4 r8 d fis |
+  \Red
+  g,4 \cricket \cross c8^\mouthclickFRENCH \saNormal g d'4 \cricket \cross c8 \saNormal g ~ |
+  g g \cricket \cross c8 \saNormal g d' \cricket \cross c8 \saNormal d |
+  \Black
   \stemNeutral
   \cricket
   \berioGoalposts
@@ -1213,7 +1312,10 @@ alto = \relative c' {
   \normal \clef "treble" \stemNeutral
   a8^\f a a |
   \time 4/4
-  R1 | R1 | R1 | R1 |
+  \cricket
+  R1 | R1 | r2 \redT \cross \Red c4^\gloveFRENCH \Black r4 |
+  R1 |
+  \saNormal
   \transpose c ees \relative c'' { r8. a16\mp^\jazzFRENCH ~ a2. \grace { gis16 [ a ] } |
   gis2. ~ \times 2/3 { gis8 gis b ~ } |
   b fis8 ~ fis2 r8 b8 ~ |
@@ -1234,9 +1336,14 @@ alto = \relative c' {
   \stemNeutral
   \saNormal
   r8 a,2..-\bendAfter #-2  |
-  r4 c^\mp r8 e r8 c |
-  r4 c r8 d e d |
-  r4 c4 r8 e r8. \stemUp \cricket c16^\mp |
+\Red
+  \saNormal
+  a4 \cricket \cross c8^\mouthclickFRENCH \saNormal a e e \cricket \cross c'8 \saNormal a ~ |
+  a a \cricket \cross c8 \saNormal a e \cricket \cross c'8 \saNormal e, b' ~ |
+  b a \cricket \cross c8 \saNormal a e4 \cricket \cross c'8 \saNormal e,16 \stemUp \Black \cricket c'16^\mp |
+  %r4 c^\mp r8 e r8 c |
+  %r4 c r8 d e d |
+  %r4 c4 r8 e r8. %\stemUp \cricket c16^\mp |
   \time 6/16
   c c c c c c
   c c c c c c
@@ -1254,8 +1361,10 @@ alto = \relative c' {
   \normal \clef "treble"
   c8^\mp^\< b c d e dis e f |
   g fis \cricket c2.^\f^\highfryFRENCH |
-  c4-.^\mp c-. c-. c-. |
-  c4-. \times 2/3 { c8 r8 \cricket c^\tapefastFRENCH } \times 2/3 { c c c } r16 \cross c8.:32^\rireFRENCH |
+  \saNormal
+  \Red
+  gis'4^\mp^\< a8 f8^\> ~ f8 c^\mp f c |
+  gis'4 \times 2/3 { a8 \Black r8 \cricket c,^\tapefastFRENCH } \times 2/3 { c c c } r16 \cross c8.:32^\rireFRENCH |
   \times 2/3 { c2--^\tapeslowFRENCH c-- c-- } |
   \time 3/4
   c4-- c-. c-. |
@@ -1293,14 +1402,17 @@ alto = \relative c' {
   e'8 g e d e d d4 |
   b8 d b a b a a4 |
   \time 4/4
-  bes4     bes32 bes bes bes bes8   bes32 bes16 bes32 bes bes bes bes ~   bes4 ~ |
+  \Red
+  \once \override TextScript #'color =#red
+  bes,4^\markup \italic \column { "même rythme," "l'octave en dessous" }     bes32 bes bes bes bes8   bes32 bes16 bes32 bes bes bes bes ~   bes4 ~ |
   bes8 ~ bes32 bes bes bes    bes bes bes bes bes bes bes16 ~    bes8 bes32 bes bes16 ~   bes8 bes32 bes bes bes |
   \time 3/4
   bes bes bes bes bes8 ~ bes4 ~    bes32 bes bes bes bes bes16. ~
   \time 2/4
   bes8.. bes32 bes32 bes bes bes ~ bes32 bes16. |
+  \Black
   \cricket \clef percussion \berioGoalposts
-  c,1^\mp^\slowglissFRENCH \glissando  s4 |
+  c1^\mp^\slowglissFRENCH \glissando  s4 |
   \time 3/4
   s2. |
   \time 7/8
@@ -1310,12 +1422,15 @@ alto = \relative c' {
   \time 9/8
   s1 c'8 |
   \time 4/4
-  R1 |
-  R1^\fermataMarkup |
+  \Red \redT
+  \cricket c,1:32^\markup \italic "drumroll" |
+  \Black
+  R1^\fermataMarkup
   \normal \clef "treble"
-  c,1^\ppp ~ |
+  \Red
+  a1^\ppp ~ |
   \time 6/4
-  c4 \air \clef percussion \ctip \stemTrans \sustainG c4*4^\>^\bravoFRENCH \glissando \grace { \hideNotes c8 \unHideNotes } r4\! \normalG |
+  a4 \Black \air \clef percussion \ctip \stemTrans \sustainG c4*4^\>^\bravoFRENCH \glissando \grace { \hideNotes c8 \unHideNotes } r4\! \normalG |
   \time 4/4
   \normal
   \cricket
@@ -1325,12 +1440,12 @@ alto = \relative c' {
   cis,1 |
   e2. ( g4 ~ |
   g8 a b4 ~ b8 a g e ~ |
-  e8 cis4 e4 g8 ) r4^\roundFFdynamic |
+  e8 cis4 e4 g8 ) \Red a4^\ff ~ |
   \time 3/4
-  bes16.^\f bes32 bes bes bes bes    bes bes bes bes bes8 ~    bes8 ~ bes32 bes bes bes |
+  a32 \Black \Red \redT bes,16^\f^\markup \italic { toujours l'octave en dessous } bes32 bes bes bes bes    bes bes bes bes bes8 ~    bes8 ~ bes32 bes bes bes |
   \time 4/4
   bes4 ~    bes8 bes32 bes bes bes    ~ bes4 ~   bes32 bes bes bes bes bes bes bes |
-  r4 g4^\mf \glissando ees4. r8 |
+  r4 \Black g'4^\mf \glissando ees4. r8 |
   \time 3/16
   \clef percussion \cricket
   \stemUp
@@ -1384,9 +1499,15 @@ altoWords = \lyricmode {
   â
   no you're not
   \repeat unfold 30 \skip 1
-  A -- ra -- ça a pra -- ia.
-  Que -- ri -- do te a -- mo.
-  Es -- ca -- pa co -- mi -- go. Sim
+  \RedL
+  A \skip 1 pra -- ia. \skip 1
+  Va -- mos. \skip 1 Fu -- ga \skip 1 con -- mi -- go.
+  \skip 1 A -- mor.  \skip 1 Va -- mos. \skip 1 Ô sim \skip 1
+  É tar -- de. \skip 1 Fu -- ga \skip 1 con mi -- go \skip 1 e pa -- ra \skip 1 sem -- pre. \skip 1
+  \BlackL
+%  A -- ra -- ça a pra -- ia.
+%  Que -- ri -- do te a -- mo.
+%  Es -- ca -- pa co -- mi -- go. Sim
   Chi -- qui -- ta ba -- na -- na
   Chi -- qui -- ta ba -- na -- na
   Chi -- qui -- ta ba -- na -- na
@@ -1402,7 +1523,11 @@ altoWords = \lyricmode {
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
   pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é pi -- ti -- é
-  A -- ra -- ça a pra
+  %A -- ra -- ça a pra
+  \RedL
+  A \skip 1 pra -- ia. \skip 1
+  Va -- mos. \skip 1 Fu -- ga \skip 1 con
+  \BlackL
   J -- sho's on the rizz!
   Bang, you're dead.
   Bang, you're dead.
@@ -1417,12 +1542,19 @@ altoWords = \lyricmode {
   Schloß!
   Chi -- qui -- ta ba -- na -- na
   Sil -- ly "ra -"
+  \skip 1
   \repeat unfold 13 \skip 1
   No! No! No! No! No! No! No! No! No! No!
   right -- eous fuck!
   â
-  Tem cui -- da -- do pe -- ri -- go
-  E um
+  \RedL
+  E \skip 1 es -- cu -- ro \skip 1
+  Nem dá \skip 1 na -- da \skip 1
+  Sen -- ho -- ra \skip 1
+  A -- mor \skip 1 E
+  \BlackL
+  %Tem cui -- da -- do pe -- ri -- go
+  %E um
   Chi -- qui -- ta ba -- na -- na
   Chi -- qui -- ta ba -- na -- na
   Chi -- qui -- ta ba -- na -- na
@@ -1430,7 +1562,10 @@ altoWords = \lyricmode {
   pu -- tain j'ar -- rive pas
   \repeat unfold 10 back
   â
-  \repeat unfold 6 Merck
+  %\repeat unfold 6 Merck
+  \RedL
+  Save me please you got to save me
+  \BlackL
   J -- sho's for kids \skip 1 J -- sho's for kids.
   \repeat unfold 2 Merck
   Al -- lez
@@ -1448,8 +1583,9 @@ altoWords = \lyricmode {
   vi -- si -- bi -- li -- um om -- ni -- um et  in -- vi -- si -- bi -- li -- um.
   Et in u -- num Do -- mi -- num IE -- SUM
   oooooo " "
+  \skip 1
   Schloß! " "
-  Sil -- ly "ra -"
+  Sil -- ly rab -- \RedL bit. \BlackL
   CHRI -- STUM, Fi -- li -- um De -- i un -- i -- gen -- i -- tum.
   Et ex Pa -- tre na -- tum an -- te om -- ni -- a sæ -- cu -- la.
   J -- sho
@@ -1987,11 +2123,13 @@ bass = \relative c' {
   \time 3/8
   c4. |
   \time 4/4
-  R1 |
-  R1 |
-  R1 |
+  \Red
+  c1 ~ |
+  c1 ~ |
+  c1 ~ |
   \time 3/4
-  R2. |
+  c2. |
+  \Black
   \time 4/4
   R1 |
   \FatTextManual #'(-0.2 . 0.2)
@@ -2116,21 +2254,24 @@ bass = \relative c' {
   \stemNeutral
   R1 |
   R1 |
+  \cricket
   \diamond c1^\mf^\mooFRENCH
   R1 |
   \time 6/16
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
-  R4. |
+  \Red
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
+  c4. ~ |
   \time 9/16
-  R4.*3/2 |
+  c16 r8 r4. |
+  \Black
   \time 2/2
   \normal \clef bass
   c,8^\mp^\< b c d e dis e f |
@@ -2162,14 +2303,21 @@ bass = \relative c' {
   \time 2/2
   \air \clef percussion
   \mark "*"
-  R1 | R1 | R1 |
-  R1 |
-  R1 |
-  R1 |
-  R1 | R1 | R1 | R1 |
+  \Red
+  \cricket \berioGoalposts \clef percussion r2. c'4^\pekingFRENCH ~ |
+  c2 r4 e4 ~ |
+  e2 r2 |
+  d2 ~ d8 f4. |
+  r4 e2 e4 |
+  r4 c r e ~ |
+  e2 r8 d4. |
+  c4 r d2 |
+  r4 d2 r4 |
+  r8 b4. ~ b8 r4 c8 |
   \time 4/4
+  \Black
   \normal \clef bass
-  bes16.^\f bes32 bes bes bes bes ~     bes16 bes32 bes ~ bes8 ~    bes8.. bes32     bes bes bes bes bes bes bes16 ~ |
+  bes,16.^\f bes32 bes bes bes bes ~     bes16 bes32 bes ~ bes8 ~    bes8.. bes32     bes bes bes bes bes bes bes16 ~ |
   bes8. bes32 bes    bes bes bes8. ~     bes16 bes32 bes bes bes bes bes   bes bes bes bes bes bes16. ~ |
   \time 3/4
   bes8 bes32 bes bes bes     bes bes bes8. ~    bes4 ~    |
@@ -2204,8 +2352,10 @@ bass = \relative c' {
   a2. r4\roundFFdynamic |
   bes4^\f ~   bes8 bes32 bes bes bes    bes bes bes8. |
   \times 2/3 { bes16 bes \cricket \berioGoalposts \clef percussion b'4 } \times 2/3 { g8 g a8 ~ } \times 2/3 { a8 f f } \times 2/3 { f g4 } |
+  \bNormal
+  r2 \Red ees4. \Black r16
   \cricket \clef percussion
-  r2... c32 c |  
+  c'32 c |  
   \time 3/16
   \stemUp
   c8 c16 |
@@ -2241,6 +2391,9 @@ bassWords = \lyricmode {
   Schloß!
   shhh
   \repeat unfold 3 \skip 1
+  \RedL
+  zhhhh
+  \BlackL
   shhh
   Sil -- ly "ra -"
   Sil -- ly "ra -"
@@ -2276,6 +2429,9 @@ bassWords = \lyricmode {
   No! No! No! No! No! No! No! No! No! No!
   fuck!
   mooooooooo
+  \RedL
+  shhh
+  \BlackL
   \repeat unfold 13 back
   \repeat unfold 14 Merck 
   Al -- lez
@@ -2283,6 +2439,10 @@ bassWords = \lyricmode {
   J -- sho
   " " sho sho
   J -- sho
+  \RedL
+  \markup { \center-column { 來 lái } } \markup { \center-column { 如 rú }} \markup { \center-column { 春 chūn }} \markup { \center-column { 夢 mèng }} \markup { \center-column { 幾 jĭ }} \markup { \center-column { 多 duō }} \markup { \center-column { 時 shí }}
+  \markup { \center-column { 去 qù }} \markup { \center-column { 似 sì }} \markup { \center-column { 朝 zhāo }} \markup { \center-column { 云 yún }} \markup { \center-column { 無 wú }} \markup { \center-column { 覓 mì }} \markup { \center-column { 處 chù}}
+  \BlackL
   Cre -- do in u -- num De -- um,
   Pa -- trem om -- ni -- po -- ten -- tem,
   fac -- to -- rem cæ -- li et ter -- ræ,
@@ -2294,6 +2454,9 @@ bassWords = \lyricmode {
   Sil -- ly "ra -"
   Fi -- li -- um De -- i un -- i -- gen -- i -- tum.
   Mon -- stre n'est pas très pra -- ti -- quant.
+  \RedL
+  sho
+  \BlackL
   J -- sho
   Bang, you're dead.
   Bang, you're dead.
@@ -2306,6 +2469,7 @@ bassWords = \lyricmode {
   \new ChoirStaff <<
     \new Staff = "sopstaff" <<
       \set Staff.instrumentName = #"Marie"
+      \set Staff.shortInstrumentName = #"Marie"
       \new Voice = "soprano" {
         << \soprano \marks >>
       }
@@ -2313,20 +2477,23 @@ bassWords = \lyricmode {
     >>
     \new Staff <<
       \set Staff.instrumentName = #"Elsa"
+      \set Staff.shortInstrumentName = #"Elsa"
       \new Voice = "alto" {
         \alto
       }
       \lyricsto "alto" \new Lyrics { \altoWords }
     >>
-    \new Staff = "tenstaff" <<
+%{    \new Staff = "tenstaff" <<
       \set Staff.instrumentName = #"Ryan"
       \new Voice = "tenor" {
         \tenor
       }
       \lyricsto "tenor" \new Lyrics { \tenorWords }
     >>
+%}
     \new Staff <<
       \set Staff.instrumentName = #"Eudes"
+      \set Staff.shortInstrumentName = #"Eudes"
       \new Voice = "bass" {
         \bass
       }
