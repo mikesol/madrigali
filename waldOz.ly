@@ -3777,7 +3777,7 @@ altoFuzz = \relative c' { %\autoBeamOff
    %\times 6/7 { ais4 gis8 fis e4 c8 } |
    b8 r r2 |
 }   \key cis \major {
-  r16 eis8. cis8 dis eis fis |
+  eis4 cis8 dis eis fis |
 }   \key c \major {
   \times 2/3 { gis2 ais4 } gis8 [ fis ] eis dis |
 }}
@@ -3798,7 +3798,7 @@ tenorFuzz = \relative c { %\autoBeamOff
   cis4^\f ~ cis8 fis ~ fis4 |
   gis4 ais r8 |
 }   \key c \major {
-  r2 b4 |
+  r2 r8 b8 |
 }   \key cis \major {
   ais4^\mf fisis gis |
 }   \key c \major {
